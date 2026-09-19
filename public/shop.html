@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalog — Blankloom</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo"><span class="swatch"></span>BLANKLOOM</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html" class="active">Catalog</a>
+  </nav>
+  <div class="header-right">
+    <a href="cart.html" class="cart-btn">BAG · 0<span class="cart-count" id="cart-count"></span></a>
+  </div>
+</header>
+
+<div class="page-head">
+  <h1>The Catalog</h1>
+  <div class="count mono" id="entry-count"></div>
+</div>
+<div class="grid" id="shop-grid"></div>
+
+<footer>
+  <div class="foot-col logo" style="font-size:18px;"><span class="swatch"></span>BLANKLOOM</div>
+  <div class="foot-col">
+    <h4>CATALOG</h4>
+    <a href="shop.html">All Tees</a>
+  </div>
+  <div class="foot-col">
+    <h4>STUDIO</h4>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  document.getElementById("entry-count").textContent = PRODUCTS.length.toString().padStart(3, "0") + " ENTRIES";
+  document.getElementById("shop-grid").innerHTML = PRODUCTS.map(p => `
+    <a class="card" href="product.html?id=${p.id}">
+      <div class="card-img">
+        ${p.stock === 0 ? '<span class="tag soldout">SOLD OUT</span>' : (p.stock <= 10 ? `<span class="tag">${p.stock} LEFT</span>` : "")}
+        ${tshirtSVG(p.print)}
+      </div>
+      <h3>${p.name}</h3>
+      <div class="price">${formatPrice(p.price)}</div>
+    </a>
+  `).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — Blankloom</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo"><span class="swatch"></span>BLANKLOOM</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html" class="active">Catalog</a>
+  </nav>
+  <div class="header-right">
+    <a href="cart.html" class="cart-btn">BAG · 0<span class="cart-count" id="cart-count"></span></a>
+  </div>
+</header>
+
+<div id="product-root"></div>
+
+<footer>
+  <div class="foot-col logo" style="font-size:18px;"><span class="swatch"></span>BLANKLOOM</div>
+  <div class="foot-col">
+    <h4>CATALOG</h4>
+    <a href="shop.html">All Tees</a>
+  </div>
+  <div class="foot-col">
+    <h4>STUDIO</h4>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const product = getProduct(params.get("id"));
+  const root = document.getElementById("product-root");
+
+  if (!product) {
+    root.innerHTML = `<div class="empty-cart"><p>We couldn't find that tee.</p><a href="shop.html" class="btn-primary">Back to catalog</a></div>`;
+  } else {
+    let selectedSize = null;
+    let qty = 1;
+    const soldOut = product.stock === 0;
+
+    root.innerHTML = `
+      <div class="product-detail">
+        <div class="product-media">${tshirtSVG(product.print, "50%")}</div>
+        <div class="product-info">
+          <div class="code mono">${product.code} / ${product.color.toUpperCase()}</div>
+          <h1>${product.name}</h1>
+          <div class="price">${formatPrice(product.price)}</div>
+          <p class="desc">${product.desc}</p>
+
+          <div class="size-picker">
+            <label>Size</label>
+            <div class="size-options" id="size-options">
+              ${product.sizes.map(s => `<button class="size-opt" data-size="${s}" ${soldOut ? "disabled" : ""}>${s}</button>`).join("")}
+            </div>
+          </div>
+
+          <div class="qty-row">
+            <label style="margin:0; font-size:12.5px; color:var(--ink-faint);">Qty</label>
+            <div class="qty-control">
+              <button id="qty-minus" ${soldOut ? "disabled" : ""}>−</button>
+              <span id="qty-val">1</span>
+              <button id="qty-plus" ${soldOut ? "disabled" : ""}>+</button>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="add-btn" ${soldOut ? "disabled" : ""} style="width:100%; margin-bottom:14px;">
+            ${soldOut ? "Sold Out" : "Add to Bag"}
+          </button>
+          <div class="stock-note" id="stock-note">
+            ${soldOut ? "This run has sold out." : (product.stock <= 10 ? `Only ${product.stock} left in this run.` : "In stock, ships in 2–4 days.")}
+          </div>
+        </div>
+      </div>
+    `;
+
+    if (!soldOut) {
+      document.querySelectorAll(".size-opt").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".size-opt").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          selectedSize = btn.dataset.size;
+        });
+      });
+
+      document.getElementById("qty-minus").addEventListener("click", () => {
+        qty = Math.max(1, qty - 1);
+        document.getElementById("qty-val").textContent = qty;
+      });
+      document.getElementById("qty-plus").addEventListener("click", () => {
+        qty = Math.min(product.stock, qty + 1);
+        document.getElementById("qty-val").textContent = qty;
+      });
+
+      document.getElementById("add-btn").addEventListener("click", () => {
+        if (!selectedSize) {
+          document.getElementById("stock-note").innerHTML = '<span style="color:var(--error);">Pick a size first.</span>';
+          return;
+        }
+        addToCart(product.id, selectedSize, qty);
+        document.getElementById("add-btn").textContent = "Added ✓";
+        setTimeout(() => { document.getElementById("add-btn").textContent = "Add to Bag"; }, 1400);
+      });
+    }
+  }
+</script>
+</body>
+</html>
