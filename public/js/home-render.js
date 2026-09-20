@@ -3,26 +3,9 @@
    ------------------------------------------------------------
    This file reads SITE_DATA (site-data.js) and builds the page.
    You shouldn't need to edit this file — edit site-data.js instead.
+   Shared helpers (formatPrice, getProduct, printSVG, productMedia)
+   come from product-utils.js, loaded before this file.
    ============================================================ */
-
-// Placeholder garment-print icons, keyed by the "print" value used in site-data.js.
-function printSVG(type, extraAttrs) {
-  extraAttrs = extraAttrs || "";
-  const prints = {
-    circle: `<circle cx="50" cy="55" r="14" stroke="#2563EB" stroke-width="2" fill="none"/>`,
-    grid: `<g stroke="#10B981" stroke-width="1.2"><line x1="38" y1="45" x2="38" y2="68"/><line x1="50" y1="45" x2="50" y2="68"/><line x1="62" y1="45" x2="62" y2="68"/></g>`,
-    type: `<text x="50" y="62" font-family="Space Mono, monospace" font-size="10" font-weight="700" fill="#0F172A" text-anchor="middle">TYPO</text>`,
-    splatter: `<g fill="#0F172A"><circle cx="42" cy="50" r="2.4"/><circle cx="55" cy="55" r="1.6"/><circle cx="48" cy="64" r="3"/><circle cx="60" cy="46" r="1.8"/></g>`
-  };
-  return `<svg viewBox="0 0 100 110" role="img" aria-label="${type} print design" ${extraAttrs}>
-    <path d="M28 8 L8 22 L15 38 L25 32 L25 100 L75 100 L75 32 L85 38 L92 22 L72 8 L60 16 L40 16 Z" stroke="#0F172A" stroke-width="1.6" fill="none"/>
-    ${prints[type] || ""}
-  </svg>`;
-}
-
-function formatPrice(n) {
-  return "₹" + n.toLocaleString("en-IN");
-}
 
 function renderNav() {
   const navEl = document.getElementById("primary-nav");
@@ -47,6 +30,7 @@ function renderAnnouncement() {
 
 function renderHero() {
   const h = SITE_DATA.hero;
+  const featured = getProduct(h.featuredProductId) || SITE_DATA.products[0];
   document.getElementById("hero-eyebrow").textContent = h.eyebrow;
   document.getElementById("hero-headline-top").textContent = h.headlineTop;
   document.getElementById("hero-headline-accent").textContent = h.headlineAccent;
@@ -63,10 +47,10 @@ function renderHero() {
     <text x="50" y="60" font-family="Space Mono, monospace" font-size="9" font-weight="700" fill="#2563EB" text-anchor="middle">${h.mediaLabel}</text>
     <text x="50" y="70" font-family="Space Mono, monospace" font-size="5" fill="#a6acc2" text-anchor="middle">${h.mediaSubLabel}</text>
   `;
-  document.getElementById("float-card-name").textContent = h.floatCard.name;
-  document.getElementById("float-card-meta").textContent = h.floatCard.meta;
-  document.getElementById("float-card-price").textContent = formatPrice(h.floatCard.price);
-  document.getElementById("float-card-svg").innerHTML = printSVG("circle");
+  document.getElementById("float-card-name").textContent = featured.name;
+  document.getElementById("float-card-meta").textContent = featured.color;
+  document.getElementById("float-card-price").textContent = formatPrice(featured.price);
+  document.getElementById("float-card-svg").innerHTML = printSVG(featured.print);
 }
 
 function renderStats() {
@@ -81,18 +65,19 @@ function renderStats() {
 
 function renderBestsellers() {
   const b = SITE_DATA.bestsellers;
+  const products = b.productIds.map(id => getProduct(id)).filter(Boolean);
   const section = document.getElementById("bestsellers");
   section.setAttribute("aria-labelledby", "bestsellers-heading");
   document.getElementById("bestsellers-eyebrow").textContent = b.eyebrow;
   document.getElementById("bestsellers-heading").textContent = b.title;
 
-  document.getElementById("bestseller-grid").innerHTML = b.products.map(p => `
+  document.getElementById("bestseller-grid").innerHTML = products.map(p => `
     <div class="pcard">
       <a href="product.html?id=${p.id}" class="pcard-media-link">
         <div class="pcard-media">
           ${p.badge ? `<span class="pbadge ${p.badge}">${p.badgeLabel}</span>` : ""}
-          ${printSVG(p.print)}
-          ${p.stockNote ? `<span class="pstock">${p.stockNote}</span>` : ""}
+          ${productMedia(p)}
+          ${p.stockCount && p.stockCount <= 15 ? `<span class="pstock">Only ${p.stockCount} left</span>` : ""}
         </div>
       </a>
       <div class="pcard-body">
@@ -133,7 +118,7 @@ function renderUGC() {
   document.getElementById("ugc-heading").textContent = u.title;
   document.getElementById("ugc-grid").innerHTML = Array.from({ length: u.tileCount }).map(() => `
     <div class="ugc-tile">
-      ${printSVG("circle", 'width="45%"')}
+      <div style="width:45%;">${printSVG("circle")}</div>
       <span class="tag-handle">${u.hashtag}</span>
     </div>
   `).join("");
@@ -212,12 +197,24 @@ function initMobileMenu() {
 function initQuickAdd() {
   document.querySelectorAll(".pquick").forEach(btn => {
     btn.addEventListener("click", () => {
+      const id = btn.dataset.productId;
+      const product = getProduct(id);
+      const defaultSize = product.sizes[Math.floor(product.sizes.length / 2)];
+      addToCart(id, defaultSize, 1);
+      renderCartCountLabel();
       const original = btn.textContent;
       btn.textContent = "Added ✓";
       btn.disabled = true;
       setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1200);
     });
   });
+}
+
+function renderCartCountLabel() {
+  const label = document.getElementById("cart-count-label");
+  if (!label) return;
+  const count = cartCount();
+  label.textContent = count === 1 ? "1 item" : `${count} items`;
 }
 
 function initNewsletterForms() {
@@ -247,4 +244,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   initQuickAdd();
   initNewsletterForms();
+  renderCartCountLabel();
 });

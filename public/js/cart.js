@@ -57,11 +57,10 @@ function cartTotal() {
 }
 
 function updateCartCount() {
-  const el = document.getElementById("cart-count");
+  const el = document.getElementById("cart-count-label");
   if (!el) return;
   const count = cartCount();
-  el.textContent = count;
-  el.style.display = count > 0 ? "flex" : "none";
+  el.textContent = count === 1 ? "1 item" : `${count} items`;
 }
 
 document.addEventListener("DOMContentLoaded", updateCartCount);

@@ -1,9 +1,20 @@
 /* ============================================================
    BLANKLOOM — SITE DATA
    ------------------------------------------------------------
-   Edit ANYTHING in this file and the homepage updates itself.
-   No HTML/CSS knowledge needed to change text, prices, products,
-   nav links, or footer content — just edit the values below.
+   THIS IS THE ONLY FILE YOU SHOULD NEED TO EDIT.
+   Every page (home, catalog, product, cart, checkout) reads
+   its text, prices, and products from this one file.
+
+   TO ADD A REAL PRODUCT PHOTO:
+   1. Drop your image file into: public/images/products/
+   2. Set that product's "image" field below to the file path,
+      e.g. "images/products/cyber-samurai.jpg"
+   3. Leave "image" as null to keep using the placeholder icon.
+
+   TO ADD A NEW PRODUCT: copy one of the objects in the
+   "products" array below, give it a unique "id", and fill in
+   your own values. It will automatically appear in the catalog,
+   and on the homepage if you add its id to bestsellers.productIds.
    ============================================================ */
 
 const SITE_DATA = {
@@ -14,18 +25,197 @@ const SITE_DATA = {
     tagline: "Heavyweight printed cotton tees, engineered for oversized silhouette and precision prints."
   },
 
-  // Nav bar links — add/remove/rename entries here, they render automatically.
+  // Nav bar links — add/remove/rename entries here, they render automatically on every page.
   nav: [
     { label: "Home", href: "index.html" },
     { label: "Catalog", href: "shop.html" },
-    { label: "Bestseller", href: "#bestsellers" }
+    { label: "Bestseller", href: "index.html#bestsellers" }
   ],
 
   announcement: {
-    highlight: "",
-    items: ["FREE SHIPPING OVER ₹999", "USE CODE BLANK20"]
+    highlight: "⚡ DROP 04 LIVE",
+    items: ["FREE SHIPPING OVER ₹1999", "USE CODE BLANK20"]
   },
 
+  // ------------------------------------------------------------------
+  // FULL PRODUCT CATALOG — the single source of truth for every product.
+  // Fields:
+  //   id           unique slug, used in URLs (product.html?id=...)
+  //   name         product title
+  //   price        current price (number, no symbol)
+  //   originalPrice  set a number to show a strikethrough "was" price, or null
+  //   badge        "limited" | "selling" | null
+  //   badgeLabel   text shown on the badge, e.g. "Limited Drop"
+  //   stockCount   number of units left (used for low-stock warnings)
+  //   sizes        array of available sizes
+  //   color        display name of the colour, e.g. "Vintage Faded Black"
+  //   print        placeholder icon key: "circle" | "grid" | "type" | "splatter"
+  //                (ignored once you set a real "image")
+  //   image        path to a real product photo, or null to use the placeholder icon
+  //   rating       { score: "4.8", count: 128 }
+  //   description  shown on the product detail page
+  //   sku          shown on the product detail page
+  //   category     used for catalog filtering, e.g. "Graphic Tees"
+  // ------------------------------------------------------------------
+  products: [
+    {
+      id: "cyber-samurai",
+      name: "Cyber Samurai Heavy Tee",
+      price: 2299,
+      originalPrice: null,
+      badge: "limited",
+      badgeLabel: "Limited Drop",
+      stockCount: 14,
+      sizes: ["S", "M", "L", "XL"],
+      color: "Vintage Faded Black",
+      print: "circle",
+      image: null,
+      rating: { score: "4.8", count: 128 },
+      description: "Heavyweight 220 GSM cotton tee with a hand-pulled front print. Boxy oversized fit with dropped shoulders.",
+      sku: "BL-CS-014",
+      category: "Graphic Tees"
+    },
+    {
+      id: "acid-botany",
+      name: "Acid Botany Oversized Graphic",
+      price: 2499,
+      originalPrice: 2999,
+      badge: "selling",
+      badgeLabel: "Selling Fast",
+      stockCount: 8,
+      sizes: ["M", "L", "XL", "2XL"],
+      color: "Bone White",
+      print: "grid",
+      image: null,
+      rating: { score: "4.6", count: 76 },
+      description: "Eco-certified reactive pigment front graphic on 220 GSM combed cotton. Runs true to oversized sizing.",
+      sku: "BL-AB-015",
+      category: "Graphic Tees"
+    },
+    {
+      id: "tokyo-typo",
+      name: "Tokyo Typo Monolith",
+      price: 2199,
+      originalPrice: null,
+      badge: "limited",
+      badgeLabel: "Limited Drop",
+      stockCount: 6,
+      sizes: ["S", "M", "L"],
+      color: "Charcoal",
+      print: "type",
+      image: null,
+      rating: { score: "4.9", count: 54 },
+      description: "Minimalist chest-pocket typography print. Monochrome architectural lettering on heavyweight charcoal cotton.",
+      sku: "BL-TT-016",
+      category: "Typography"
+    },
+    {
+      id: "desert-mirage",
+      name: "Desert Mirage DTG Print",
+      price: 2399,
+      originalPrice: null,
+      badge: "selling",
+      badgeLabel: "Selling Fast",
+      stockCount: 9,
+      sizes: ["S", "M", "L", "XL"],
+      color: "Sun-Bleached Sand",
+      print: "splatter",
+      image: null,
+      rating: { score: "4.7", count: 91 },
+      description: "Sun-bleached wash with a gradient atmospheric splatter print. Direct-to-garment cured for a soft hand-feel.",
+      sku: "BL-DM-017",
+      category: "Acid Wash"
+    },
+    {
+      id: "kinetic-velocity",
+      name: "Kinetic Velocity Tee",
+      price: 1899,
+      originalPrice: null,
+      badge: null,
+      badgeLabel: null,
+      stockCount: 19,
+      sizes: ["S", "M", "L", "XL"],
+      color: "Jet Black",
+      print: "grid",
+      image: null,
+      rating: { score: "4.5", count: 19 },
+      description: "Clean back-print motion graphic on our standard 220 GSM heavyweight blank.",
+      sku: "BL-KV-018",
+      category: "Minimalist"
+    },
+    {
+      id: "architectural-mono",
+      name: "Architectural Mono Tee",
+      price: 2099,
+      originalPrice: 2499,
+      badge: null,
+      badgeLabel: null,
+      stockCount: 57,
+      sizes: ["S", "M", "L", "XL", "2XL"],
+      color: "Steel Blue",
+      print: "type",
+      image: null,
+      rating: { score: "4.7", count: 57 },
+      description: "Structural line-art typography print inspired by architectural blueprints.",
+      sku: "BL-AM-019",
+      category: "Typography"
+    },
+    {
+      id: "distortion-field",
+      name: "Distortion Field Graphic",
+      price: 1999,
+      originalPrice: null,
+      badge: null,
+      badgeLabel: null,
+      stockCount: 76,
+      sizes: ["S", "M", "L"],
+      color: "Bone White",
+      print: "circle",
+      image: null,
+      rating: { score: "4.6", count: 76 },
+      description: "Warped circular graphic front print with a subtle distortion effect.",
+      sku: "BL-DF-020",
+      category: "Graphic Tees"
+    },
+    {
+      id: "akira-genesis",
+      name: "Akira Genesis Print",
+      price: 2299,
+      originalPrice: null,
+      badge: null,
+      badgeLabel: null,
+      stockCount: 64,
+      sizes: ["M", "L", "XL"],
+      color: "Vintage Faded Black",
+      print: "splatter",
+      image: null,
+      rating: { score: "4.9", count: 64 },
+      description: "Full-front splatter graphic inspired by retro-futurist anime poster art.",
+      sku: "BL-AG-021",
+      category: "Graphic Tees"
+    },
+    {
+      id: "riot-static",
+      name: "Riot Static Heavy Tee",
+      price: 2599,
+      originalPrice: null,
+      badge: "limited",
+      badgeLabel: "Limited Drop",
+      stockCount: 4,
+      sizes: ["M", "L", "XL"],
+      color: "Jet Black",
+      print: "grid",
+      image: null,
+      rating: { score: "4.8", count: 33 },
+      description: "Static-noise back print in reflective ink, on our heaviest 220 GSM cotton base.",
+      sku: "BL-RS-022",
+      category: "Minimalist"
+    }
+  ],
+
+  // ------------------------------------------------------------------
+  // HOMEPAGE CONTENT
+  // ------------------------------------------------------------------
   hero: {
     eyebrow: "◆ Limited Archive · Drop 04",
     headlineTop: "WEAR ART",
@@ -36,7 +226,7 @@ const SITE_DATA = {
     ratingScore: "4.9/5",
     ratingNote: "from 400+ streetwear collectors",
     badge: "220 GSM · LIMITED CUT",
-    floatCard: { name: "Neon Void Tee", meta: "Structured boxy drape", price: 2499 },
+    featuredProductId: "acid-botany",
     mediaLabel: "NEON VOID",
     mediaSubLabel: "CYBERNETIC SYNDICATE"
   },
@@ -48,55 +238,12 @@ const SITE_DATA = {
     { value: "100%", label: "Ringspun Combed Cotton", mint: true }
   ],
 
-  // Products shown in the "Trending / Bestseller" grid on the homepage.
-  // print: one of "circle" | "grid" | "type" | "splatter" — controls the placeholder graphic.
-  // badge: "limited" | "selling" | null
+  // Which products show in the homepage "Trending Drop" grid — just list their ids.
   bestsellers: {
     id: "bestsellers",
     eyebrow: "Limited Capacity Archive",
     title: "Trending Drop 04",
-    products: [
-      {
-        id: "cyber-samurai",
-        name: "Cyber Samurai Heavy Tee",
-        price: 2299,
-        badge: "limited",
-        badgeLabel: "Limited Drop",
-        stockNote: "Only 14 left",
-        sizes: ["S", "M", "L", "XL"],
-        print: "circle"
-      },
-      {
-        id: "acid-botany",
-        name: "Acid Botany Oversized Graphic",
-        price: 2499,
-        badge: "selling",
-        badgeLabel: "Selling Fast",
-        stockNote: "Only 8 left",
-        sizes: ["M", "L", "XL", "2XL"],
-        print: "grid"
-      },
-      {
-        id: "tokyo-typo",
-        name: "Tokyo Typo Monolith",
-        price: 2199,
-        badge: "limited",
-        badgeLabel: "Limited Drop",
-        stockNote: "Only 6 left",
-        sizes: ["S", "M", "L"],
-        print: "type"
-      },
-      {
-        id: "desert-mirage",
-        name: "Desert Mirage DTG Print",
-        price: 2399,
-        badge: "selling",
-        badgeLabel: "Selling Fast",
-        stockNote: "Only 9 left",
-        sizes: ["S", "M", "L", "XL"],
-        print: "splatter"
-      }
-    ]
+    productIds: ["cyber-samurai", "acid-botany", "tokyo-typo", "desert-mirage"]
   },
 
   specs: {
@@ -138,6 +285,28 @@ const SITE_DATA = {
     note: "Zero spam. Only priority zero-hour release alerts."
   },
 
+  // ------------------------------------------------------------------
+  // CATALOG PAGE (shop.html) CONTENT
+  // ------------------------------------------------------------------
+  catalogPage: {
+    eyebrow: "Batch #047 · In Stock",
+    title: "All Printed Graphic Tees",
+    description: "Screen-printed and DTG-cured streetwear staples engineered with drop shoulders, dense organic fibre, and anti-crack reactive dyes.",
+    categories: ["Graphic Tees", "Acid Wash", "Minimalist", "Typography"],
+    warranty: { title: "Screen Print Warranty", text: "Anti-crack cure, wash tested over 60 mechanical cycles." }
+  },
+
+  // ------------------------------------------------------------------
+  // CART PAGE CONTENT
+  // ------------------------------------------------------------------
+  cartPage: {
+    freeShippingThreshold: 1999,
+    addon: { name: "Fabric Care Wash Bag", description: "Protects cured prints", price: 299 }
+  },
+
+  // ------------------------------------------------------------------
+  // FOOTER (shared across every page)
+  // ------------------------------------------------------------------
   footer: {
     description: "Heavyweight cotton streetwear, hand-pulled screen prints, and small-batch graphic garments engineered for high endurance and raw street curation.",
     ecoBadge: { title: "100% Combed Cotton", subtitle: "Sustainably sourced · 220 GSM crafted jersey" },

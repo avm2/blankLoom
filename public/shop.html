@@ -2,56 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catalog — Blankloom</title>
-<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Catalog — Blankloom | All Printed Graphic Tees</title>
+<meta name="description" content="Browse all Blankloom printed cotton tees — screen printed and DTG-cured streetwear staples in small batches.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://blankloom.in/shop.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blankloom">
+<meta property="og:title" content="Catalog — Blankloom">
+<meta property="og:description" content="Browse all Blankloom printed cotton tees.">
+<meta name="theme-color" content="#0F172A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/shop.css">
 </head>
 <body>
 
+<a href="#main-content" class="visually-hidden-focusable">Skip to content</a>
+
+<div class="announce" role="note" aria-label="Site announcement"><div id="announce-content"></div></div>
+
 <header>
-  <a href="index.html" class="logo"><span class="swatch"></span>BLANKLOOM</a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html" class="active">Catalog</a>
-  </nav>
+  <a href="index.html" class="logo" aria-label="Blankloom home"><span class="mark" aria-hidden="true"></span><span>BLANKLOOM</span></a>
+  <nav id="primary-nav" aria-label="Primary navigation"></nav>
   <div class="header-right">
-    <a href="cart.html" class="cart-btn">BAG · 0<span class="cart-count" id="cart-count"></span></a>
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <button class="icon-btn" aria-label="Wishlist">♡</button>
+    <a href="cart.html" class="bag-btn" aria-label="View bag">🛍 <span id="cart-count-label">0 items</span></a>
   </div>
 </header>
+<nav id="mobile-nav" aria-label="Mobile navigation"></nav>
 
-<div class="page-head">
-  <h1>The Catalog</h1>
-  <div class="count mono" id="entry-count"></div>
-</div>
-<div class="grid" id="shop-grid"></div>
+<div class="breadcrumb">Home / <span>Catalog</span></div>
+
+<main id="main-content">
+  <div class="page-header">
+    <span class="eyebrow" id="catalog-eyebrow"></span>
+    <h1 id="catalog-title"></h1>
+    <p id="catalog-description"></p>
+  </div>
+
+  <div class="layout">
+    <aside class="filters" aria-label="Product filters">
+      <div class="filter-group">
+        <h4>Category</h4>
+        <div id="category-filters"></div>
+      </div>
+      <div class="filter-group">
+        <h4>Size</h4>
+        <div class="size-chip-row" id="size-filters"></div>
+      </div>
+      <div class="filter-group" style="border-bottom:none;">
+        <button class="filter-reset" id="filter-reset" type="button">Clear all filters</button>
+      </div>
+      <div class="warranty-note">
+        <span style="font-size:16px;" aria-hidden="true">🛡️</span>
+        <div><b id="warranty-title"></b><span id="warranty-text"></span></div>
+      </div>
+    </aside>
+
+    <div class="results">
+      <div class="toolbar">
+        <span class="count mono" id="results-count"></span>
+        <select class="sort-select" id="sort-select" aria-label="Sort products">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+      <div class="grid3col" id="catalog-grid"></div>
+    </div>
+  </div>
+</main>
 
 <footer>
-  <div class="foot-col logo" style="font-size:18px;"><span class="swatch"></span>BLANKLOOM</div>
-  <div class="foot-col">
-    <h4>CATALOG</h4>
-    <a href="shop.html">All Tees</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="logo"><span class="mark" aria-hidden="true"></span><span>BLANKLOOM</span></div>
+      <p id="footer-description"></p>
+      <div class="foot-eco">
+        <span style="font-size:18px;" aria-hidden="true">🌿</span>
+        <div><b id="footer-eco-title"></b><span id="footer-eco-subtitle"></span></div>
+      </div>
+    </div>
+    <div id="footer-columns" style="display:contents;"></div>
+    <div class="foot-col foot-newsletter">
+      <h4 id="footer-newsletter-title"></h4>
+      <p style="font-size:13.5px; color:var(--text-soft); margin:0 0 4px;" id="footer-newsletter-desc"></p>
+      <form id="footer-newsletter-form">
+        <label for="footer-newsletter-email" class="visually-hidden-focusable">Email address</label>
+        <input type="email" id="footer-newsletter-email" required>
+        <button type="submit" id="footer-newsletter-btn"></button>
+      </form>
+    </div>
   </div>
-  <div class="foot-col">
-    <h4>STUDIO</h4>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </div>
+  <div class="foot-bottom"><span id="footer-copyright"></span><span id="footer-legal"></span></div>
 </footer>
 
-<script src="js/products.js"></script>
+<script src="js/site-data.js"></script>
+<script src="js/product-utils.js"></script>
 <script src="js/cart.js"></script>
-<script>
-  document.getElementById("entry-count").textContent = PRODUCTS.length.toString().padStart(3, "0") + " ENTRIES";
-  document.getElementById("shop-grid").innerHTML = PRODUCTS.map(p => `
-    <a class="card" href="product.html?id=${p.id}">
-      <div class="card-img">
-        ${p.stock === 0 ? '<span class="tag soldout">SOLD OUT</span>' : (p.stock <= 10 ? `<span class="tag">${p.stock} LEFT</span>` : "")}
-        ${tshirtSVG(p.print)}
-      </div>
-      <h3>${p.name}</h3>
-      <div class="price">${formatPrice(p.price)}</div>
-    </a>
-  `).join("");
-</script>
+<script src="js/shop-render.js"></script>
 </body>
 </html>

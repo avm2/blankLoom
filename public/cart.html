@@ -2,88 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Your Bag — Blankloom</title>
-<link rel="stylesheet" href="css/style.css">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0F172A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
 
+<a href="#main-content" class="visually-hidden-focusable">Skip to content</a>
+
+<div class="announce" role="note" aria-label="Site announcement"><div id="announce-content"></div></div>
+
 <header>
-  <a href="index.html" class="logo"><span class="swatch"></span>BLANKLOOM</a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Catalog</a>
-  </nav>
+  <a href="index.html" class="logo" aria-label="Blankloom home"><span class="mark" aria-hidden="true"></span><span>BLANKLOOM</span></a>
+  <nav id="primary-nav" aria-label="Primary navigation"></nav>
   <div class="header-right">
-    <a href="cart.html" class="cart-btn active">BAG · 0<span class="cart-count" id="cart-count"></span></a>
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <a href="cart.html" class="bag-btn" aria-label="View bag">🛍 <span id="cart-count-label">0 items</span></a>
   </div>
 </header>
+<nav id="mobile-nav" aria-label="Mobile navigation"></nav>
 
-<div class="page-head">
-  <h1>Your Bag</h1>
-</div>
-
-<div class="cart-page" id="cart-root"></div>
+<main id="main-content">
+  <div class="cart-page">
+    <h1>Your Bag</h1>
+    <div class="ship-progress" id="ship-progress"></div>
+    <div id="cart-root"></div>
+  </div>
+</main>
 
 <footer>
-  <div class="foot-col logo" style="font-size:18px;"><span class="swatch"></span>BLANKLOOM</div>
-  <div class="foot-col">
-    <h4>CATALOG</h4>
-    <a href="shop.html">All Tees</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="logo"><span class="mark" aria-hidden="true"></span><span>BLANKLOOM</span></div>
+      <p id="footer-description"></p>
+      <div class="foot-eco">
+        <span style="font-size:18px;" aria-hidden="true">🌿</span>
+        <div><b id="footer-eco-title"></b><span id="footer-eco-subtitle"></span></div>
+      </div>
+    </div>
+    <div id="footer-columns" style="display:contents;"></div>
   </div>
+  <div class="foot-bottom"><span id="footer-copyright"></span><span id="footer-legal"></span></div>
 </footer>
 
-<script src="js/products.js"></script>
+<script src="js/site-data.js"></script>
+<script src="js/product-utils.js"></script>
 <script src="js/cart.js"></script>
-<script>
-  function renderCart() {
-    const cart = getCart();
-    const root = document.getElementById("cart-root");
-
-    if (cart.length === 0) {
-      root.innerHTML = `<div class="empty-cart"><p>Your bag is empty.</p><a href="shop.html" class="btn-primary">Browse the catalog</a></div>`;
-      return;
-    }
-
-    root.innerHTML = cart.map(item => {
-      const p = getProduct(item.id);
-      if (!p) return "";
-      return `
-        <div class="cart-row">
-          <div class="thumb">${tshirtSVG(p.print, "70%")}</div>
-          <div>
-            <div class="name">${p.name}</div>
-            <div class="meta">Size ${item.size} · ${p.color}</div>
-            <button class="remove" onclick="handleRemove('${item.id}','${item.size}')">Remove</button>
-          </div>
-          <div class="qty-control">
-            <button onclick="handleQty('${item.id}','${item.size}', ${item.qty - 1})">−</button>
-            <span>${item.qty}</span>
-            <button onclick="handleQty('${item.id}','${item.size}', ${item.qty + 1})">+</button>
-          </div>
-          <div class="mono">${formatPrice(p.price)}</div>
-          <div class="mono" style="font-weight:600;">${formatPrice(p.price * item.qty)}</div>
-        </div>
-      `;
-    }).join("") + `
-      <div class="cart-summary">
-        <div class="total">Total: ${formatPrice(cartTotal())}</div>
-        <a href="checkout.html" class="btn-primary">Checkout</a>
-      </div>
-    `;
-  }
-
-  function handleRemove(id, size) {
-    removeFromCart(id, size);
-    renderCart();
-  }
-  function handleQty(id, size, qty) {
-    if (qty < 1) { handleRemove(id, size); return; }
-    updateQty(id, size, qty);
-    renderCart();
-  }
-
-  renderCart();
-</script>
+<script src="js/cart-render.js"></script>
 </body>
 </html>
