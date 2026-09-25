@@ -1,7 +1,8 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const nodemailer = require("nodemailer");
+const { sendEmail } = require("./email-sender");
+const { appendOrderToSheet } = require("./sheets-logger");
 
 const router = express.Router();
 const ORDERS_FILE = path.join(__dirname, "..", "data", "orders.json");
@@ -40,17 +41,6 @@ function isValidOrder(body) {
   if (typeof total !== "number" || total <= 0) return "Invalid order total.";
   return null;
 }
-
-// ---------- mail transport ----------
-// Uses Gmail SMTP with an App Password by default. See README for setup,
-// or swap the transport config for any other SMTP provider.
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS
-  }
-});
 
 function buildOwnerEmail(order) {
   const itemsHtml = order.items
@@ -102,30 +92,40 @@ router.post("/", async (req, res) => {
     return res.status(500).json({ success: false, error: "Could not save order. Please try again." });
   }
 
-  // Send emails, but don't fail the order if email delivery has an issue —
-  // the order is already saved to disk as the source of truth.
+  // Send emails via Resend's HTTP API (works on Render's free tier —
+  // unlike SMTP, which Render blocks outbound on free web services).
+  // Non-blocking: an email failure never fails the order, since it's
+  // already saved to disk as the source of truth.
   try {
-    if (process.env.MAIL_USER && process.env.MAIL_PASS) {
-      await transporter.sendMail({
-        from: `"Blankloom" <${process.env.MAIL_USER}>`,
-        to: process.env.OWNER_EMAIL || process.env.MAIL_USER,
+    if (process.env.RESEND_API_KEY) {
+      await sendEmail({
+        to: process.env.OWNER_EMAIL,
         subject: `New order ${order.orderId} — ₹${order.total}`,
         html: buildOwnerEmail(order)
       });
 
       if (req.body.email) {
-        await transporter.sendMail({
-          from: `"Blankloom" <${process.env.MAIL_USER}>`,
+        await sendEmail({
           to: req.body.email,
           subject: `Your Blankloom order ${order.orderId}`,
           html: buildCustomerEmail(order)
         });
       }
     } else {
-      console.warn("MAIL_USER/MAIL_PASS not set — skipping email send. Order was still saved.");
+      console.warn("RESEND_API_KEY not set — skipping email send. Order was still saved.");
     }
   } catch (mailErr) {
     console.error("Email sending failed (order was still saved):", mailErr.message);
+  }
+
+  // Log to Google Sheets too — this is the durable record on hosts with
+  // ephemeral disks (like Render), since it lives on Google's servers
+  // instead of the local filesystem. Non-blocking: a Sheets failure
+  // never fails the order, since it's already saved and emailed.
+  try {
+    await appendOrderToSheet(order);
+  } catch (sheetErr) {
+    console.error("Google Sheets logging failed (order was still saved/emailed):", sheetErr.message);
   }
 
   res.json({ success: true, orderId: order.orderId });
