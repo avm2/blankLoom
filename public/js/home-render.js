@@ -39,18 +39,78 @@ function renderHero() {
   document.getElementById("hero-cta-primary").href = h.ctaPrimary.href;
   document.getElementById("hero-cta-secondary").textContent = h.ctaSecondary.label;
   document.getElementById("hero-cta-secondary").href = h.ctaSecondary.href;
-  document.getElementById("hero-rating-score").textContent = h.ratingScore;
-  document.getElementById("hero-rating-note").textContent = h.ratingNote;
+  // document.getElementById("hero-rating-score").textContent = h.ratingScore;
+  // document.getElementById("hero-rating-note").textContent = h.ratingNote;
   document.getElementById("hero-badge").textContent = h.badge;
-  document.getElementById("hero-media-svg").innerHTML = `
-    <path d="M28 8 L8 22 L15 38 L25 32 L25 100 L75 100 L75 32 L85 38 L92 22 L72 8 L60 16 L40 16 Z" stroke="#fff" stroke-width="1.6" fill="none" opacity="0.9"/>
-    <text x="50" y="60" font-family="Space Mono, monospace" font-size="9" font-weight="700" fill="#2563EB" text-anchor="middle">${h.mediaLabel}</text>
-    <text x="50" y="70" font-family="Space Mono, monospace" font-size="5" fill="#a6acc2" text-anchor="middle">${h.mediaSubLabel}</text>
-  `;
-  document.getElementById("float-card-name").textContent = featured.name;
-  document.getElementById("float-card-meta").textContent = featured.color;
-  document.getElementById("float-card-price").textContent = formatPrice(featured.price);
-  document.getElementById("float-card-svg").innerHTML = printSVG(featured.print);
+
+  // document.getElementById("float-card-name").textContent = featured.name;
+  // document.getElementById("float-card-meta").textContent = featured.color;
+  // document.getElementById("float-card-price").textContent = formatPrice(featured.price);
+  // document.getElementById("float-card-svg").innerHTML = printSVG(featured.print);
+
+  renderHeroSlider();
+}
+
+// Builds the auto-advancing hero slider. Uses SITE_DATA.hero.slides if
+// explicitly set, otherwise automatically pulls the first photo of each
+// bestseller product (falling back to the placeholder icon per-product
+// if that product has no real photos yet). The whole slider is one big
+// link to the catalog — clicking anywhere on it goes to shop.html.
+function renderHeroSlider() {
+  const h = SITE_DATA.hero;
+  const track = document.getElementById("hero-slider-track");
+  const dotsEl = document.getElementById("hero-slider-dots");
+
+  let slides;
+  if (h.slides && h.slides.length > 0) {
+    slides = h.slides.map(src => ({ type: "image", src }));
+  } else {
+    const bestsellerProducts = SITE_DATA.bestsellers.productIds.map(id => getProduct(id)).filter(Boolean);
+    slides = bestsellerProducts.map(p => {
+      if (p.images && p.images.length > 0) return { type: "image", src: p.images[0] };
+      return { type: "svg", print: p.print };
+    });
+  }
+
+  if (slides.length === 0) {
+    slides = [{ type: "svg", print: "circle" }];
+  }
+
+  track.innerHTML = slides.map((slide, i) => `
+    <div class="hero-slide${i === 0 ? " active" : ""}" data-index="${i}">
+      ${slide.type === "image"
+        ? `<img src="${slide.src}" alt="Blankloom catalog preview">`
+        : `<svg viewBox="0 0 100 110" role="img" aria-label="Print design preview">${printSVG(slide.print).replace(/<svg[^>]*>|<\/svg>/g, "")}</svg>`}
+    </div>
+  `).join("");
+
+  dotsEl.innerHTML = slides.map((_, i) => `<span class="${i === 0 ? "active" : ""}" data-index="${i}"></span>`).join("");
+
+  if (slides.length <= 1) return;
+
+  let current = 0;
+  const slideEls = track.querySelectorAll(".hero-slide");
+  const dotEls = dotsEl.querySelectorAll("span");
+
+  function goToSlide(index) {
+    slideEls[current].classList.remove("active");
+    dotEls[current].classList.remove("active");
+    current = index;
+    slideEls[current].classList.add("active");
+    dotEls[current].classList.add("active");
+  }
+
+  let autoAdvance = setInterval(() => {
+    goToSlide((current + 1) % slides.length);
+  }, h.slideIntervalMs || 4000);
+
+  // Pause auto-advance while the visitor is hovering/interacting, so it
+  // doesn't jump to a different slide right as they're about to click.
+  const sliderEl = document.getElementById("hero-slider");
+  sliderEl.addEventListener("mouseenter", () => clearInterval(autoAdvance));
+  sliderEl.addEventListener("mouseleave", () => {
+    autoAdvance = setInterval(() => goToSlide((current + 1) % slides.length), h.slideIntervalMs || 4000);
+  });
 }
 
 function renderStats() {

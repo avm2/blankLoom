@@ -30,6 +30,10 @@ img,svg{max-width:100%;display:block;}
 .announce .hl{color:var(--emerald);}
 .announce .sep{color:#8890a0; font-weight:400; letter-spacing:0.05em;}
 
+.icon-svg{width:19px; height:19px; display:block;}
+.bag-btn .icon-svg{width:17px; height:17px;}
+.mobile-menu-toggle .icon-svg{width:20px; height:20px;}
+
 /* ---------- header ---------- */
 header{
   position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px);
@@ -106,6 +110,11 @@ nav#primary-nav a.active{background:var(--ink); color:#fff;}
 .pcard:hover{box-shadow:0 12px 32px -8px rgba(15,23,42,0.12); border-color:#cfd6e2;}
 .pcard-media-link{display:block;}
 .pcard-media{aspect-ratio:4/5; background:var(--surface-dim); position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+.pcard-media::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:70px; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0) 100%);
+}
+.pcard-media img{position:relative;}
 .pbadge{
   position:absolute; top:12px; left:12px; font-family:'Space Mono',monospace; font-size:9.5px; font-weight:700; letter-spacing:0.04em;
   text-transform:uppercase; padding:4px 10px; border-radius:99px;
@@ -138,6 +147,19 @@ nav#primary-nav a.active{background:var(--ink); color:#fff;}
 .pquick:disabled{opacity:0.6; cursor:default;}
 @media(max-width:1000px){ .grid4{grid-template-columns:repeat(2,1fr);} }
 @media(max-width:900px){ .grid3col{grid-template-columns:repeat(2,1fr);} }
+
+/* ---------- small phone refinements ---------- */
+@media(max-width:480px){
+  .announce{font-size:10.5px; gap:8px; padding:8px 12px; line-height:1.5;}
+  .grid4, .grid3col{gap:14px;}
+  .pcard-body{padding:12px 12px 14px;}
+  .pcard-body h3{font-size:13.5px;}
+  .pquick{padding:9px 10px; font-size:9.5px;}
+  .section{padding:48px 5vw;}
+  .page-header{padding:20px 5vw 26px;}
+  .page-header h1{font-size:26px;}
+  .btn-primary, .btn-outline{padding:14px 20px; font-size:12px;}
+}
 
 /* ---------- section shell (reused across pages) ---------- */
 .section{padding:80px 4vw; max-width:1400px; margin:0 auto;}

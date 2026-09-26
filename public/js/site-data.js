@@ -23,23 +23,23 @@
    ============================================================ */
 
 const SITE_DATA = {
+
   brand: {
     name: "BLANKLOOM",
     url: "https://blankloom.in",
-    tagline:
-      "Heavyweight printed cotton tees, engineered for oversized silhouette and precision prints.",
+    tagline: "Heavyweight printed cotton tees, engineered for oversized silhouette and precision prints."
   },
 
   // Nav bar links — add/remove/rename entries here, they render automatically on every page.
   nav: [
     { label: "Home", href: "index.html" },
     { label: "Catalog", href: "shop.html" },
-    { label: "Bestseller", href: "index.html#bestsellers" },
+    { label: "Bestseller", href: "index.html#bestsellers" }
   ],
 
   announcement: {
     highlight: "⚡ DROP 04 LIVE",
-    items: ["FREE SHIPPING OVER ₹1999", "USE CODE BLANK20"],
+    items: ["FREE SHIPPING OVER ₹999", "USE CODE BLANK10"]
   },
 
   // ------------------------------------------------------------------
@@ -78,16 +78,14 @@ const SITE_DATA = {
       print: "circle",
       images: [
         "images/products/1000144495.jpg",
-        "images/products/1000144066.jpg",
-       
-        "images/products/1000144498.jpg",
-        "images/products/1000144535.jpg",
+  "images/products/1000144066.jpg",
+  "images/products/1000144498.jpg",
+  "images/products/1000144535.jpg"
       ],
       rating: { score: "4.8", count: 128 },
-      description:
-        "Heavyweight 220 GSM cotton tee with a hand-pulled front print. Boxy oversized fit with dropped shoulders.",
+      description: "Heavyweight 220 GSM cotton tee with a hand-pulled front print. Boxy oversized fit with dropped shoulders.",
       sku: "BL-CS-014",
-      category: "Graphic Tees",
+      category: "Graphic Tees"
     },
     {
       id: "acid-botany",
@@ -100,18 +98,16 @@ const SITE_DATA = {
       sizes: ["M", "L", "XL", "2XL"],
       color: "Bone White",
       print: "grid",
-      images: [
+        images: [
         "images/products/1000144495.jpg",
-        "images/products/1000144066.jpg",
-       
-        "images/products/1000144498.jpg",
-        "images/products/1000144535.jpg",
+  "images/products/1000144066.jpg",
+  "images/products/1000144498.jpg",
+  "images/products/1000144535.jpg"
       ],
       rating: { score: "4.6", count: 76 },
-      description:
-        "Eco-certified reactive pigment front graphic on 220 GSM combed cotton. Runs true to oversized sizing.",
+      description: "Eco-certified reactive pigment front graphic on 220 GSM combed cotton. Runs true to oversized sizing.",
       sku: "BL-AB-015",
-      category: "Graphic Tees",
+      category: "Graphic Tees"
     },
     {
       id: "tokyo-typo",
@@ -126,16 +122,14 @@ const SITE_DATA = {
       print: "type",
        images: [
         "images/products/1000144495.jpg",
-        "images/products/1000144066.jpg",
-       
-        "images/products/1000144498.jpg",
-        "images/products/1000144535.jpg",
+  "images/products/1000144066.jpg",
+  "images/products/1000144498.jpg",
+  "images/products/1000144535.jpg"
       ],
       rating: { score: "4.9", count: 54 },
-      description:
-        "Minimalist chest-pocket typography print. Monochrome architectural lettering on heavyweight charcoal cotton.",
+      description: "Minimalist chest-pocket typography print. Monochrome architectural lettering on heavyweight charcoal cotton.",
       sku: "BL-TT-016",
-      category: "Typography",
+      category: "Typography"
     },
     {
       id: "desert-mirage",
@@ -148,18 +142,16 @@ const SITE_DATA = {
       sizes: ["S", "M", "L", "XL"],
       color: "Sun-Bleached Sand",
       print: "splatter",
-      images: [
+       images: [
         "images/products/1000144495.jpg",
-        "images/products/1000144066.jpg",
-       
-        "images/products/1000144498.jpg",
-        "images/products/1000144535.jpg",
+  "images/products/1000144066.jpg",
+  "images/products/1000144498.jpg",
+  "images/products/1000144535.jpg"
       ],
       rating: { score: "4.7", count: 91 },
-      description:
-        "Sun-bleached wash with a gradient atmospheric splatter print. Direct-to-garment cured for a soft hand-feel.",
+      description: "Sun-bleached wash with a gradient atmospheric splatter print. Direct-to-garment cured for a soft hand-feel.",
       sku: "BL-DM-017",
-      category: "Acid Wash",
+      category: "Acid Wash"
     },
     {
       id: "kinetic-velocity",
@@ -172,18 +164,16 @@ const SITE_DATA = {
       sizes: ["S", "M", "L", "XL"],
       color: "Jet Black",
       print: "grid",
-      images: [
+       images: [
         "images/products/1000144495.jpg",
-        "images/products/1000144066.jpg",
-       
-        "images/products/1000144498.jpg",
-        "images/products/1000144535.jpg",
+  "images/products/1000144066.jpg",
+  "images/products/1000144498.jpg",
+  "images/products/1000144535.jpg"
       ],
       rating: { score: "4.5", count: 19 },
-      description:
-        "Clean back-print motion graphic on our standard 220 GSM heavyweight blank.",
+      description: "Clean back-print motion graphic on our standard 220 GSM heavyweight blank.",
       sku: "BL-KV-018",
-      category: "Minimalist",
+      category: "Minimalist"
     },
     {
       id: "architectural-mono",
@@ -196,18 +186,11 @@ const SITE_DATA = {
       sizes: ["S", "M", "L", "XL", "2XL"],
       color: "Steel Blue",
       print: "type",
-      images: [
-        "images/products/1000144495.jpg",
-        "images/products/1000144066.jpg",
-       
-        "images/products/1000144498.jpg",
-        "images/products/1000144535.jpg",
-      ],
+      images: [],
       rating: { score: "4.7", count: 57 },
-      description:
-        "Structural line-art typography print inspired by architectural blueprints.",
+      description: "Structural line-art typography print inspired by architectural blueprints.",
       sku: "BL-AM-019",
-      category: "Typography",
+      category: "Typography"
     },
     {
       id: "distortion-field",
@@ -222,10 +205,9 @@ const SITE_DATA = {
       print: "circle",
       images: [],
       rating: { score: "4.6", count: 76 },
-      description:
-        "Warped circular graphic front print with a subtle distortion effect.",
+      description: "Warped circular graphic front print with a subtle distortion effect.",
       sku: "BL-DF-020",
-      category: "Graphic Tees",
+      category: "Graphic Tees"
     },
     {
       id: "akira-genesis",
@@ -240,10 +222,9 @@ const SITE_DATA = {
       print: "splatter",
       images: [],
       rating: { score: "4.9", count: 64 },
-      description:
-        "Full-front splatter graphic inspired by retro-futurist anime poster art.",
+      description: "Full-front splatter graphic inspired by retro-futurist anime poster art.",
       sku: "BL-AG-021",
-      category: "Graphic Tees",
+      category: "Graphic Tees"
     },
     {
       id: "riot-static",
@@ -258,37 +239,56 @@ const SITE_DATA = {
       print: "grid",
       images: [],
       rating: { score: "4.8", count: 33 },
-      description:
-        "Static-noise back print in reflective ink, on our heaviest 220 GSM cotton base.",
+      description: "Static-noise back print in reflective ink, on our heaviest 220 GSM cotton base.",
       sku: "BL-RS-022",
-      category: "Minimalist",
-    },
+      category: "Minimalist"
+    }
   ],
 
   // ------------------------------------------------------------------
   // HOMEPAGE CONTENT
   // ------------------------------------------------------------------
-  hero: {
+   hero: {
     eyebrow: "◆ Limited Archive · Drop 04",
     headlineTop: "WEAR ART",
     headlineAccent: "NOT BLANKS.",
-    description:
-      "Heavyweight 220 GSM cotton tees engineered for oversized silhouette and precision hand-screen prints. No mass runs — every design is pulled to order.",
+    description: "Heavyweight 220 GSM cotton tees engineered for oversized silhouette and precision hand-screen prints. No mass runs — every design is pulled to order.",
     ctaPrimary: { label: "Shop Latest Drop →", href: "shop.html" },
     ctaSecondary: { label: "Explore Catalog", href: "shop.html" },
-    ratingScore: "4.9/5",
-    ratingNote: "from 400+ streetwear collectors",
+    // ratingScore: "4.9/5",
+    // ratingNote: "from 400+ streetwear collectors",
     badge: "220 GSM · LIMITED CUT",
     featuredProductId: "acid-botany",
     mediaLabel: "NEON VOID",
     mediaSubLabel: "CYBERNETIC SYNDICATE",
+ 
+    // ------------------------------------------------------------
+    // HERO IMAGE SLIDER — auto-advancing slideshow on the homepage.
+    // Clicking any slide takes the visitor to the catalog (shop.html).
+    //
+    // OPTION A (recommended): leave this as an empty array below.
+    // The slider will then automatically show the first photo of
+    // each product listed in bestsellers.productIds further down
+    // this file — so once you add real photos to those products'
+    // "images" arrays, the slider fills itself in with zero extra work.
+    //
+    // OPTION B: list specific image paths here to show exact photos
+    // in an exact order, regardless of which products they belong to:
+    //   slides: ["images/products/photo1.jpg", "images/products/photo2.jpg"]
+    //
+    // slideIntervalMs controls how long each slide stays up before
+    // auto-advancing (4000 = 4 seconds).
+    slides: [],
+    slideIntervalMs: 4000
   },
+ 
+
 
   stats: [
     { value: "220", label: "GSM per Garment" },
     { value: "500", label: "DPI Screen Print", mint: true },
     { value: "0%", label: "Fade Cracking" },
-    { value: "100%", label: "Ringspun Combed Cotton", mint: true },
+    { value: "100%", label: "Ringspun Combed Cotton", mint: true }
   ],
 
   // Which products show in the homepage "Trending Drop" grid — just list their ids.
@@ -296,33 +296,28 @@ const SITE_DATA = {
     id: "bestsellers",
     eyebrow: "Limited Capacity Archive",
     title: "Trending Drop 04",
-    productIds: ["cyber-samurai", "acid-botany", "tokyo-typo", "desert-mirage"],
+    productIds: ["cyber-samurai", "cyber-samurai","cyber-samurai","cyber-samurai","acid-botany", "tokyo-typo", "desert-mirage"]
   },
 
   specs: {
     eyebrow: "Textile Lab Specification",
     title: "Engineered for Perfection",
-    description:
-      "We built Blankloom because fast-fashion blanks shrink, curl at the collar, and peel after four washes. We engineered every seam, yarn, and ink matrix from raw thread to final cut.",
+    description: "We built Blankloom because fast-fashion blanks shrink, curl at the collar, and peel after four washes. We engineered every seam, yarn, and ink matrix from raw thread to final cut.",
     bullets: [
       "<b>220 GSM vs typical 160 GSM blanks</b> — 50% denser fabric weight provides structural boxy silhouette without sagging or transparency.",
       "<b>Pre-shrunk 100% ringspun combed cotton</b> — hydrothermal steam stabilization prevents garment warping after every wash.",
-      "<b>Eco-certified reactive DTG inks</b> — molecularly bonded into the cotton fibre so zero cracking, zero rubbery heat transfers.",
+      "<b>Eco-certified reactive DTG inks</b> — molecularly bonded into the cotton fibre so zero cracking, zero rubbery heat transfers."
     ],
     matrix: {
       headers: ["Parameter", "Typical Blanks", "Blankloom"],
       rows: [
         ["Fabric weight", "150–160 GSM (thin)", "220 GSM (heavy)"],
         ["Print longevity", "Cracks at 10–15 washes", "Permanent (50+ washes)"],
-        [
-          "Collar structure",
-          "Basic weave distortion",
-          "Twin-needle ribbed collar",
-        ],
+        ["Collar structure", "Basic weave distortion", "Twin-needle ribbed collar"],
         ["Fit retention", "Shrinks up to 8%", "<2% pre-shrunk"],
-        ["Tactile feel", "Plastic sticker feel", "Zero-hand feel DTG ink"],
-      ],
-    },
+        ["Tactile feel", "Plastic sticker feel", "Zero-hand feel DTG ink"]
+      ]
+    }
   },
 
   ugc: {
@@ -331,18 +326,16 @@ const SITE_DATA = {
     hashtag: "#blankloom",
     tileCount: 4,
     ratingScore: "4.82/5",
-    ratingNote:
-      "from 400+ verified buyers · Tag your fit on Instagram to be featured",
+    ratingNote: "from 400+ verified buyers · Tag your fit on Instagram to be featured"
   },
 
   teaser: {
     countdown: "Drop 05 in 04 days : 18 hours : 22 mins",
     title: "Don't Miss Drop 05: Neo-Tokyo Acid Lab.",
-    description:
-      "Limited run of 300 numbered garments. Once the allocation hits zero, plates are destroyed and this design is permanently archived.",
+    description: "Limited run of 300 numbered garments. Once the allocation hits zero, plates are destroyed and this design is permanently archived.",
     emailPlaceholder: "ENTER YOUR EMAIL",
     buttonLabel: "Notify Me",
-    note: "Zero spam. Only priority zero-hour release alerts.",
+    note: "Zero spam. Only priority zero-hour release alerts."
   },
 
   // ------------------------------------------------------------------
@@ -351,37 +344,25 @@ const SITE_DATA = {
   catalogPage: {
     eyebrow: "Batch #047 · In Stock",
     title: "All Printed Graphic Tees",
-    description:
-      "Screen-printed and DTG-cured streetwear staples engineered with drop shoulders, dense organic fibre, and anti-crack reactive dyes.",
+    description: "Screen-printed and DTG-cured streetwear staples engineered with drop shoulders, dense organic fibre, and anti-crack reactive dyes.",
     categories: ["Graphic Tees", "Acid Wash", "Minimalist", "Typography"],
-    warranty: {
-      title: "Screen Print Warranty",
-      text: "Anti-crack cure, wash tested over 60 mechanical cycles.",
-    },
+    warranty: { title: "Screen Print Warranty", text: "Anti-crack cure, wash tested over 60 mechanical cycles." }
   },
 
   // ------------------------------------------------------------------
   // CART PAGE CONTENT
   // ------------------------------------------------------------------
   cartPage: {
-    freeShippingThreshold: 1999,
-    addon: {
-      name: "Fabric Care Wash Bag",
-      description: "Protects cured prints",
-      price: 299,
-    },
+    freeShippingThreshold:999,
+    addon: { name: "Fabric Care Wash Bag", description: "Protects cured prints", price: 299 }
   },
 
   // ------------------------------------------------------------------
   // FOOTER (shared across every page)
   // ------------------------------------------------------------------
   footer: {
-    description:
-      "Heavyweight cotton streetwear, hand-pulled screen prints, and small-batch graphic garments engineered for high endurance and raw street curation.",
-    ecoBadge: {
-      title: "100% Combed Cotton",
-      subtitle: "Sustainably sourced · 220 GSM crafted jersey",
-    },
+    description: "Heavyweight cotton streetwear, hand-pulled screen prints, and small-batch graphic garments engineered for high endurance and raw street curation.",
+    ecoBadge: { title: "100% Combed Cotton", subtitle: "Sustainably sourced · 220 GSM crafted jersey" },
     columns: [
       {
         title: "Catalog",
@@ -389,8 +370,8 @@ const SITE_DATA = {
           { label: "Heavyweight Boxy Tees", href: "shop.html" },
           { label: "Graphic Drop 04", href: "shop.html" },
           { label: "Oversized Silhouettes", href: "shop.html" },
-          { label: "Archive Reprints", href: "shop.html" },
-        ],
+          { label: "Archive Reprints", href: "shop.html" }
+        ]
       },
       {
         title: "Craft & Utility",
@@ -398,18 +379,18 @@ const SITE_DATA = {
           { label: "Sizing Matrix & Fit", href: "#" },
           { label: "Print Preservation", href: "#" },
           { label: "Drop Calendar", href: "#" },
-          { label: "Track Dispatch", href: "#" },
-        ],
-      },
+          { label: "Track Dispatch", href: "#" }
+        ]
+      }
     ],
     newsletter: {
       title: "VIP Drop Radar",
-      description:
-        "Early zero-hour access to limited capsules before public sell-out.",
+      description: "Early zero-hour access to limited capsules before public sell-out.",
       placeholder: "ENTER YOUR EMAIL",
-      button: "Join",
+      button: "Join"
     },
     copyright: "© 2026 Blankloom Apparel Co. All Rights Reserved.",
-    legalLinks: "Privacy · Terms · Release Index",
-  },
+    legalLinks: "Privacy · Terms · Release Index"
+  }
+
 };
