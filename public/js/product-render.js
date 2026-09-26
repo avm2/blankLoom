@@ -36,13 +36,42 @@ function renderProduct() {
   document.getElementById("breadcrumb-name").textContent = p.name;
 
   const inStock = p.stockCount > 0;
-  document.getElementById("main-media").innerHTML = `
-    <div class="media-badges">
-      <span class="b-drop">Drop 04 / Exclusive</span>
-      <span class="b-gsm">220 GSM Heavyweight</span>
-    </div>
-    ${p.image ? `<img src="${p.image}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">` : `<div style="width:52%; position:relative; z-index:2;">${printSVG(p.print)}</div>`}
-  `;
+
+  // Gallery: use real photos if provided, otherwise fall back to the
+  // placeholder icon with no thumbnail strip.
+  const hasPhotos = p.images && p.images.length > 0;
+  const galleryImages = hasPhotos ? p.images.slice(0, 4) : [];
+
+  function renderMainMedia(src) {
+    const badges = `
+      <div class="media-badges">
+        <span class="b-drop">Drop 04 / Exclusive</span>
+        <span class="b-gsm">220 GSM Heavyweight</span>
+      </div>
+    `;
+    document.getElementById("main-media").innerHTML = src
+      ? `${badges}<img src="${src}" alt="${p.name}">`
+      : `${badges}<div>${printSVG(p.print)}</div>`;
+  }
+
+  if (hasPhotos) {
+    renderMainMedia(galleryImages[0]);
+    document.getElementById("thumbs").innerHTML = galleryImages.map((src, i) => `
+      <button type="button" class="thumb${i === 0 ? " active" : ""}" data-src="${src}" aria-label="View photo ${i + 1} of ${p.name}">
+        <img src="${src}" alt="">
+      </button>
+    `).join("");
+    document.querySelectorAll(".thumb").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+        btn.classList.add("active");
+        renderMainMedia(btn.dataset.src);
+      });
+    });
+  } else {
+    renderMainMedia(null);
+    document.getElementById("thumbs").innerHTML = "";
+  }
 
   document.getElementById("info-badges").innerHTML = `
     <span class="b-bestseller">${p.rating.count > 60 ? "Bestseller" : "New Arrival"}</span>

@@ -26,9 +26,22 @@ function isConfigured() {
 }
 
 function getAuthClient() {
+  let privateKey = process.env.GOOGLE_PRIVATE_KEY || "";
+
+  // Strip accidental surrounding quotes (common when pasting into some
+  // dashboards or .env files).
+  if (
+    (privateKey.startsWith('"') && privateKey.endsWith('"')) ||
+    (privateKey.startsWith("'") && privateKey.endsWith("'"))
+  ) {
+    privateKey = privateKey.slice(1, -1);
+  }
+
   // Render (and most hosts) store multi-line env vars with literal "\n" —
-  // convert those back into real newlines for the key to parse correctly.
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n");
+  // convert those back into real newlines. Also normalize any Windows-style
+  // \r\n that may have crept in from copy/pasting on Windows, since Node's
+  // crypto decoder rejects keys with CRLF line endings.
+  privateKey = privateKey.replace(/\\n/g, "\n").replace(/\r\n/g, "\n").trim();
 
   return new google.auth.JWT({
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,

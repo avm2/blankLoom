@@ -31,12 +31,13 @@ function printSVG(type) {
 }
 
 // Returns the markup for a product's image area — a real photo if
-// product.image is set in site-data.js, otherwise the placeholder SVG.
+// product.images has at least one entry, otherwise the placeholder SVG.
+// Always uses the FIRST image in the array (the "main" photo).
 // widthPct lets callers size the placeholder icon (e.g. "50%", "60%").
 function productMedia(product, widthPct) {
   widthPct = widthPct || "50%";
-  if (product.image) {
-    return `<img src="${product.image}" alt="${product.name}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">`;
+  if (product.images && product.images.length > 0) {
+    return `<img src="${product.images[0]}" alt="${product.name}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">`;
   }
   return `<div style="width:${widthPct};">${printSVG(product.print)}</div>`;
 }
