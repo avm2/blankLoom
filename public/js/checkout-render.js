@@ -16,7 +16,6 @@ function renderCheckout() {
     return;
   }
 
-  const total = cartTotal();
   const summaryItemsHTML = cart.map(item => {
     const p = getProduct(item.id);
     if (!p) return "";
@@ -90,9 +89,17 @@ function renderCheckout() {
     <div class="order-summary">
       <h3>Order Summary</h3>
       ${summaryItemsHTML}
-      <div class="summary-line" style="padding-top:16px; border-top:1px solid var(--border);"><span>Subtotal</span><span>${formatPrice(total)}</span></div>
-      <div class="summary-line"><span>Shipping</span><span>${total >= SITE_DATA.cartPage.freeShippingThreshold ? "Free" : "Calculated on confirmation"}</span></div>
-      <div class="summary-total"><span>Total (Pay on Delivery)</span><span>${formatPrice(total)}</span></div>
+
+      <div class="coupon-row">
+        <input type="text" id="coupon-input" placeholder="Enter coupon code" autocomplete="off">
+        <button type="button" id="coupon-apply-btn">Apply</button>
+      </div>
+      <div class="coupon-status" id="coupon-status"></div>
+
+      <div class="summary-line" style="padding-top:16px; border-top:1px solid var(--border);"><span>Subtotal</span><span id="summary-subtotal"></span></div>
+      <div class="summary-line" id="discount-line" style="display:none; color:var(--emerald);"><span>Discount (<span id="discount-code"></span>)</span><span id="summary-discount"></span></div>
+      <div class="summary-line"><span>Shipping</span><span id="summary-shipping"></span></div>
+      <div class="summary-total"><span>Total (Pay on Delivery)</span><span id="summary-total"></span></div>
       <button type="button" class="btn-place" id="submit-btn">Place Order — Pay on Delivery</button>
       <div class="form-status" id="form-status"></div>
       <div class="trust-row">
@@ -104,6 +111,76 @@ function renderCheckout() {
   `;
 
   document.getElementById("submit-btn").addEventListener("click", handleSubmit);
+
+  document.getElementById("coupon-apply-btn").addEventListener("click", applyCoupon);
+  document.getElementById("coupon-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); applyCoupon(); }
+  });
+
+  updateSummaryTotals();
+}
+
+// Tracks the currently applied coupon (or null). Recomputed on every
+// cart/coupon change via updateSummaryTotals(), which is also what
+// handleSubmit() reads from when building the order to send.
+let appliedCoupon = null;
+
+function updateSummaryTotals() {
+  const subtotal = cartTotal();
+  let discount = 0;
+
+  if (appliedCoupon) {
+    discount = appliedCoupon.type === "percent"
+      ? Math.round(subtotal * appliedCoupon.value / 100)
+      : appliedCoupon.value;
+    // Never let a coupon fully zero out (or exceed) the order total.
+    discount = Math.max(0, Math.min(discount, subtotal - 1));
+  }
+
+  const total = subtotal - discount;
+
+  document.getElementById("summary-subtotal").textContent = formatPrice(subtotal);
+  document.getElementById("summary-shipping").textContent =
+    total >= SITE_DATA.cartPage.freeShippingThreshold ? "Free" : "Calculated on confirmation";
+  document.getElementById("summary-total").textContent = formatPrice(total);
+
+  const discountLine = document.getElementById("discount-line");
+  if (appliedCoupon && discount > 0) {
+    discountLine.style.display = "flex";
+    document.getElementById("discount-code").textContent = appliedCoupon.code;
+    document.getElementById("summary-discount").textContent = "− " + formatPrice(discount);
+  } else {
+    discountLine.style.display = "none";
+  }
+
+  return { subtotal, discount, total };
+}
+
+function applyCoupon() {
+  const input = document.getElementById("coupon-input");
+  const status = document.getElementById("coupon-status");
+  const code = input.value.trim().toUpperCase();
+
+  if (!code) {
+    status.className = "coupon-status error";
+    status.textContent = "Enter a coupon code first.";
+    return;
+  }
+
+  const match = (SITE_DATA.coupons || []).find(c => c.code.toUpperCase() === code);
+
+  if (!match) {
+    appliedCoupon = null;
+    status.className = "coupon-status error";
+    status.textContent = "Invalid coupon code.";
+    updateSummaryTotals();
+    return;
+  }
+
+  appliedCoupon = match;
+  status.className = "coupon-status success";
+  status.textContent = `Applied — ${match.description}`;
+  updateSummaryTotals();
 }
 
 function validateField(id, testFn) {
@@ -157,6 +234,8 @@ async function handleSubmit() {
       return;
     }
 
+    const totals = updateSummaryTotals();
+
     const order = {
       name: document.getElementById("name").value.trim(),
       mobile: document.getElementById("mobile").value.trim(),
@@ -167,7 +246,10 @@ async function handleSubmit() {
       pincode: document.getElementById("pincode").value.trim(),
       notes: document.getElementById("notes").value.trim(),
       items,
-      total: cartTotal()
+      subtotal: totals.subtotal,
+      couponCode: appliedCoupon ? appliedCoupon.code : null,
+      discount: totals.discount,
+      total: totals.total
     };
 
     const submitBtn = document.getElementById("submit-btn");

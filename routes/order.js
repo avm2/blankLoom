@@ -56,6 +56,8 @@ function buildOwnerEmail(order) {
       <tr><th>Item</th><th>Size</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>
       ${itemsHtml}
     </table>
+    ${order.subtotal ? `<p>Subtotal: ₹${order.subtotal}</p>` : ""}
+    ${order.couponCode ? `<p>Coupon applied: <strong>${order.couponCode}</strong> (− ₹${order.discount})</p>` : ""}
     <p><strong>Total: ₹${order.total}</strong></p>
     <p>Payment: Cash on Delivery</p>
   `;

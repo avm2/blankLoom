@@ -15,7 +15,7 @@ const { google } = require("googleapis");
 // ---------------------------------------------------------------
 
 const SHEET_TAB_NAME = "Orders";
-const HEADER_ROW = ["Order ID", "Date", "Name", "Mobile", "Email", "Address", "City", "State", "Pincode", "Items", "Total", "Notes"];
+const HEADER_ROW = ["Order ID", "Date", "Name", "Mobile", "Email", "Address", "City", "State", "Pincode", "Items", "Subtotal", "Coupon", "Discount", "Total", "Notes"];
 
 function isConfigured() {
   return Boolean(
@@ -53,7 +53,7 @@ function getAuthClient() {
 async function ensureHeaderRow(sheets, spreadsheetId) {
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: `${SHEET_TAB_NAME}!A1:L1`
+    range: `${SHEET_TAB_NAME}!A1:O1`
   });
 
   const hasHeader = res.data.values && res.data.values.length > 0;
@@ -94,6 +94,9 @@ async function appendOrderToSheet(order) {
     order.state,
     order.pincode,
     itemsSummary,
+    order.subtotal || order.total,
+    order.couponCode || "",
+    order.discount || 0,
     order.total,
     order.notes || ""
   ];

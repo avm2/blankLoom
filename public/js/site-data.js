@@ -357,6 +357,11 @@ const SITE_DATA = {
     addon: { name: "Fabric Care Wash Bag", description: "Protects cured prints", price: 299 }
   },
 
+ coupons: [
+    { code: "BLANK10", type: "percent", value: 10, description: "10% off your order" },
+    { code: "avm10", type: "flat", value: 100, description: "₹100 off your order" }
+  ],
+
   // ------------------------------------------------------------------
   // FOOTER (shared across every page)
   // ------------------------------------------------------------------

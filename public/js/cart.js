@@ -2,11 +2,25 @@
 const CART_KEY = "blankloom_cart";
 
 function getCart() {
+  let cart;
   try {
-    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
   } catch (e) {
-    return [];
+    cart = [];
   }
+
+  // Self-heal: silently drop any item whose product no longer exists
+  // (e.g. a leftover from testing with an older catalog, or a product
+  // that was since removed from site-data.js). Without this, a single
+  // "ghost" item can sit invisibly in storage forever — it won't show
+  // as a row in the cart (since there's no product data to render),
+  // but it still counts toward cartCount() and blocks the cart from
+  // ever reaching 0, which in turn blocks checkout.
+  const valid = cart.filter(item => typeof getProduct === "function" && getProduct(item.id));
+  if (valid.length !== cart.length) {
+    localStorage.setItem(CART_KEY, JSON.stringify(valid));
+  }
+  return valid;
 }
 
 function saveCart(cart) {
