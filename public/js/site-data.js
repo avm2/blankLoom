@@ -23,23 +23,23 @@
    ============================================================ */
 
 const SITE_DATA = {
-
   brand: {
     name: "BLANKLOOM",
     url: "https://blankloom.in",
-    tagline: "Heavyweight printed cotton tees, engineered for oversized silhouette and precision prints."
+    tagline:
+      "Heavyweight printed cotton tees, engineered for oversized silhouette and precision prints.",
   },
 
   // Nav bar links — add/remove/rename entries here, they render automatically on every page.
   nav: [
     { label: "Home", href: "index.html" },
     { label: "Catalog", href: "shop.html" },
-    { label: "Bestseller", href: "index.html#bestsellers" }
+    { label: "Bestseller", href: "index.html#bestsellers" },
   ],
 
   announcement: {
     highlight: "⚡ DROP 04 LIVE",
-    items: ["FREE SHIPPING OVER ₹999", "USE CODE BLANK10"]
+    items: ["FREE SHIPPING OVER ₹999", "USE CODE BLANK10"],
   },
 
   // ------------------------------------------------------------------
@@ -66,202 +66,119 @@ const SITE_DATA = {
   // ------------------------------------------------------------------
   products: [
     {
-      id: "cyber-samurai",
-      name: "Cyber Samurai Heavy Tee",
-      price: 2299,
-      originalPrice: null,
-      badge: "limited",
-      badgeLabel: "Limited Drop",
-      stockCount: 14,
+      id: "hitman-45-oversized-tee",
+      name: "Hitman 45 Oversized Tee",
+      price: 549,
+      originalPrice: 899,
+      badge: null,
+      badgeLabel: "",
+      stockCount: 20,
       sizes: ["S", "M", "L", "XL"],
-      color: "Vintage Faded Black",
-      print: "circle",
+      color: "Cloud White",
+      print: "type",
+      images: [
+        "images/products/white_hitMan_ModalFront.jpeg",
+        "images/products/white_hitMan_ModalBack.jpeg",
+        "images/products/white_hitMan_front.jpeg",
+        "images/products/white_hitMan_Back.jpeg",
+      ],
+      rating: { score: "4.8", count: 0 },
+      description:
+        "A statement oversized tee built for everyday streetwear. Crafted from 240 GSM 100% cotton with a bio-washed finish for a soft, comfortable feel. Features a bold 45 graphic with a vintage-inspired print.",
+      sku: "BL-H45-001",
+      category: "Graphic Tees",
+    },
+    {
+      id: "freedom-vertical-oversized-tee",
+      name: "Freedom Vertical Oversized Tee",
+      price: 539,
+      originalPrice: 1199,
+      badge: "selling",
+      badgeLabel: "",
+      stockCount: 10,
+      sizes: ["S", "M", "L"],
+      color: "Chocolate Brown",
+      print: "type",
+      images: [
+        "images/products/Freedom_front.jpeg",
+        "images/products/Freedom_back.jpeg",
+        "images/products/Freedom_ModalFront.jpeg",
+        "images/products/Freedom_ModalBack.jpeg",
+      ],
+      rating: { score: "4.9", count: 0 },
+      description:
+        "Made for a bold streetwear look, the Freedom Vertical Tee combines a relaxed oversized silhouette with premium 240 GSM French Terry fabric. Bio-washed for a softer hand feel, with a statement vertical FREEDOM back print.",
+      sku: "BL-FR-002",
+      category: "Oversized Tees",
+    },
+    {
+      id: "king-street-graphic-tee",
+      name: "King Street Graphic Tee",
+      price: 569,
+      originalPrice: 1999,
+      badge: null,
+      badgeLabel: "Trending",
+      stockCount: 13,
+      sizes: ["S", "M", "L"],
+      color: "Jet Black",
+      print: "type",
+      images: [
+        "images/products/KingStreet_modalBack.jpeg",
+        "images/products/KingStreet_modalFront.jpeg",
+        "images/products/KingStreet_back.jpeg",
+      ],
+      rating: { score: "4.8", count: 0 },
+      description:
+        "A minimal black streetwear essential featuring a bold KING graphic. Made with 240 GSM 100% cotton and finished with a bio wash for a soft, comfortable feel that works effortlessly with everyday fits.",
+      sku: "BL-KS-003",
+      category: "Graphic Tees",
+    },
+
+    {
+      id: "18-forever-legacy-tee",
+      name: "18 Forever Legacy Tee",
+      price: 999,
+      originalPrice: null,
+      badge: "selling",
+      badgeLabel: "Trending",
+      stockCount: 20,
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      color: "Jet Black",
+      print: "type",
       images: [
         "images/products/1000144495.jpg",
-  "images/products/1000144066.jpg",
-  "images/products/1000144498.jpg",
-  "images/products/1000144535.jpg"
+        "images/products/1000144066.jpg",
+        "images/products/1000144498.jpg",
+        "images/products/1000144535.jpg",
       ],
-      rating: { score: "4.8", count: 128 },
-      description: "Heavyweight 220 GSM cotton tee with a hand-pulled front print. Boxy oversized fit with dropped shoulders.",
-      sku: "BL-CS-014",
-      category: "Graphic Tees"
+      rating: { score: "4.9", count: 0 },
+      description:
+        "A statement black tee made for fans of iconic cricket moments. Featuring a minimal 18 graphic on the front and a bold 18 Forever collage on the back. Crafted from 180 GSM 100% cotton with a bio-washed finish for a soft, comfortable feel and everyday streetwear styling.",
+      sku: "BL-18FL-007",
+      category: "Graphic Tees",
     },
-    {
-      id: "acid-botany",
-      name: "Acid Botany Oversized Graphic",
-      price: 2499,
-      originalPrice: 2999,
-      badge: "selling",
-      badgeLabel: "Selling Fast",
-      stockCount: 8,
-      sizes: ["M", "L", "XL", "2XL"],
-      color: "Bone White",
-      print: "grid",
-        images: [
-        "images/products/1000144495.jpg",
-  "images/products/1000144066.jpg",
-  "images/products/1000144498.jpg",
-  "images/products/1000144535.jpg"
-      ],
-      rating: { score: "4.6", count: 76 },
-      description: "Eco-certified reactive pigment front graphic on 220 GSM combed cotton. Runs true to oversized sizing.",
-      sku: "BL-AB-015",
-      category: "Graphic Tees"
-    },
-    {
-      id: "tokyo-typo",
-      name: "Tokyo Typo Monolith",
-      price: 2199,
-      originalPrice: null,
-      badge: "limited",
-      badgeLabel: "Limited Drop",
-      stockCount: 6,
-      sizes: ["S", "M", "L"],
-      color: "Charcoal",
-      print: "type",
-       images: [
-        "images/products/1000144495.jpg",
-  "images/products/1000144066.jpg",
-  "images/products/1000144498.jpg",
-  "images/products/1000144535.jpg"
-      ],
-      rating: { score: "4.9", count: 54 },
-      description: "Minimalist chest-pocket typography print. Monochrome architectural lettering on heavyweight charcoal cotton.",
-      sku: "BL-TT-016",
-      category: "Typography"
-    },
-    {
-      id: "desert-mirage",
-      name: "Desert Mirage DTG Print",
-      price: 2399,
-      originalPrice: null,
-      badge: "selling",
-      badgeLabel: "Selling Fast",
-      stockCount: 9,
-      sizes: ["S", "M", "L", "XL"],
-      color: "Sun-Bleached Sand",
-      print: "splatter",
-       images: [
-        "images/products/1000144495.jpg",
-  "images/products/1000144066.jpg",
-  "images/products/1000144498.jpg",
-  "images/products/1000144535.jpg"
-      ],
-      rating: { score: "4.7", count: 91 },
-      description: "Sun-bleached wash with a gradient atmospheric splatter print. Direct-to-garment cured for a soft hand-feel.",
-      sku: "BL-DM-017",
-      category: "Acid Wash"
-    },
-    {
-      id: "kinetic-velocity",
-      name: "Kinetic Velocity Tee",
-      price: 1899,
-      originalPrice: null,
-      badge: null,
-      badgeLabel: null,
-      stockCount: 19,
-      sizes: ["S", "M", "L", "XL"],
-      color: "Jet Black",
-      print: "grid",
-       images: [
-        "images/products/1000144495.jpg",
-  "images/products/1000144066.jpg",
-  "images/products/1000144498.jpg",
-  "images/products/1000144535.jpg"
-      ],
-      rating: { score: "4.5", count: 19 },
-      description: "Clean back-print motion graphic on our standard 220 GSM heavyweight blank.",
-      sku: "BL-KV-018",
-      category: "Minimalist"
-    },
-    {
-      id: "architectural-mono",
-      name: "Architectural Mono Tee",
-      price: 2099,
-      originalPrice: 2499,
-      badge: null,
-      badgeLabel: null,
-      stockCount: 57,
-      sizes: ["S", "M", "L", "XL", "2XL"],
-      color: "Steel Blue",
-      print: "type",
-      images: [],
-      rating: { score: "4.7", count: 57 },
-      description: "Structural line-art typography print inspired by architectural blueprints.",
-      sku: "BL-AM-019",
-      category: "Typography"
-    },
-    {
-      id: "distortion-field",
-      name: "Distortion Field Graphic",
-      price: 1999,
-      originalPrice: null,
-      badge: null,
-      badgeLabel: null,
-      stockCount: 76,
-      sizes: ["S", "M", "L"],
-      color: "Bone White",
-      print: "circle",
-      images: [],
-      rating: { score: "4.6", count: 76 },
-      description: "Warped circular graphic front print with a subtle distortion effect.",
-      sku: "BL-DF-020",
-      category: "Graphic Tees"
-    },
-    {
-      id: "akira-genesis",
-      name: "Akira Genesis Print",
-      price: 2299,
-      originalPrice: null,
-      badge: null,
-      badgeLabel: null,
-      stockCount: 64,
-      sizes: ["M", "L", "XL"],
-      color: "Vintage Faded Black",
-      print: "splatter",
-      images: [],
-      rating: { score: "4.9", count: 64 },
-      description: "Full-front splatter graphic inspired by retro-futurist anime poster art.",
-      sku: "BL-AG-021",
-      category: "Graphic Tees"
-    },
-    {
-      id: "riot-static",
-      name: "Riot Static Heavy Tee",
-      price: 2599,
-      originalPrice: null,
-      badge: "limited",
-      badgeLabel: "Limited Drop",
-      stockCount: 4,
-      sizes: ["M", "L", "XL"],
-      color: "Jet Black",
-      print: "grid",
-      images: [],
-      rating: { score: "4.8", count: 33 },
-      description: "Static-noise back print in reflective ink, on our heaviest 220 GSM cotton base.",
-      sku: "BL-RS-022",
-      category: "Minimalist"
-    }
+
+   
   ],
 
   // ------------------------------------------------------------------
   // HOMEPAGE CONTENT
   // ------------------------------------------------------------------
-   hero: {
+  hero: {
     eyebrow: "◆ Limited Archive · Drop 04",
     headlineTop: "WEAR ART",
     headlineAccent: "NOT BLANKS.",
-    description: "Heavyweight 220 GSM cotton tees engineered for oversized silhouette and precision hand-screen prints. No mass runs — every design is pulled to order.",
+    description:
+      "Heavyweight 240 GSM cotton tees engineered for oversized silhouette and precision hand-screen prints. No mass runs — every design is pulled to order.",
     ctaPrimary: { label: "Shop Latest Drop →", href: "shop.html" },
     ctaSecondary: { label: "Explore Catalog", href: "shop.html" },
     // ratingScore: "4.9/5",
     // ratingNote: "from 400+ streetwear collectors",
-    badge: "220 GSM · LIMITED CUT",
+    badge: "240 GSM · LIMITED CUT",
     featuredProductId: "acid-botany",
     mediaLabel: "NEON VOID",
     mediaSubLabel: "CYBERNETIC SYNDICATE",
- 
+
     // ------------------------------------------------------------
     // HERO IMAGE SLIDER — auto-advancing slideshow on the homepage.
     // Clicking any slide takes the visitor to the catalog (shop.html).
@@ -279,16 +196,14 @@ const SITE_DATA = {
     // slideIntervalMs controls how long each slide stays up before
     // auto-advancing (4000 = 4 seconds).
     slides: [],
-    slideIntervalMs: 4000
+    slideIntervalMs: 4000,
   },
- 
-
 
   stats: [
-    { value: "220", label: "GSM per Garment" },
+    { value: "240", label: "GSM per Garment" },
     { value: "500", label: "DPI Screen Print", mint: true },
     { value: "0%", label: "Fade Cracking" },
-    { value: "100%", label: "Ringspun Combed Cotton", mint: true }
+    { value: "100%", label: "Ringspun Combed Cotton", mint: true },
   ],
 
   // Which products show in the homepage "Trending Drop" grid — just list their ids.
@@ -296,28 +211,39 @@ const SITE_DATA = {
     id: "bestsellers",
     eyebrow: "Limited Capacity Archive",
     title: "Trending Drop 04",
-    productIds: ["cyber-samurai", "cyber-samurai","cyber-samurai","cyber-samurai","acid-botany", "tokyo-typo", "desert-mirage"]
+    productIds: [
+      
+      "hitman-45-oversized-tee",
+      "king-street-graphic-tee",
+      "freedom-vertical-oversized-tee",
+     "18-forever-legacy-tee",
+    ],
   },
 
   specs: {
     eyebrow: "Textile Lab Specification",
     title: "Engineered for Perfection",
-    description: "We built Blankloom because fast-fashion blanks shrink, curl at the collar, and peel after four washes. We engineered every seam, yarn, and ink matrix from raw thread to final cut.",
+    description:
+      "We built Blankloom because fast-fashion blanks shrink, curl at the collar, and peel after four washes. We engineered every seam, yarn, and ink matrix from raw thread to final cut.",
     bullets: [
-      "<b>220 GSM vs typical 160 GSM blanks</b> — 50% denser fabric weight provides structural boxy silhouette without sagging or transparency.",
+      "<b>240 GSM vs typical 160 GSM blanks</b> — 50% denser fabric weight provides structural boxy silhouette without sagging or transparency.",
       "<b>Pre-shrunk 100% ringspun combed cotton</b> — hydrothermal steam stabilization prevents garment warping after every wash.",
-      "<b>Eco-certified reactive DTG inks</b> — molecularly bonded into the cotton fibre so zero cracking, zero rubbery heat transfers."
+      "<b>Eco-certified reactive DTG inks</b> — molecularly bonded into the cotton fibre so zero cracking, zero rubbery heat transfers.",
     ],
     matrix: {
       headers: ["Parameter", "Typical Blanks", "Blankloom"],
       rows: [
-        ["Fabric weight", "150–160 GSM (thin)", "220 GSM (heavy)"],
+        ["Fabric weight", "150–160 GSM (thin)", "240 GSM (heavy)"],
         ["Print longevity", "Cracks at 10–15 washes", "Permanent (50+ washes)"],
-        ["Collar structure", "Basic weave distortion", "Twin-needle ribbed collar"],
+        [
+          "Collar structure",
+          "Basic weave distortion",
+          "Twin-needle ribbed collar",
+        ],
         ["Fit retention", "Shrinks up to 8%", "<2% pre-shrunk"],
-        ["Tactile feel", "Plastic sticker feel", "Zero-hand feel DTG ink"]
-      ]
-    }
+        ["Tactile feel", "Plastic sticker feel", "Zero-hand feel DTG ink"],
+      ],
+    },
   },
 
   ugc: {
@@ -326,16 +252,18 @@ const SITE_DATA = {
     hashtag: "#blankloom",
     tileCount: 4,
     ratingScore: "4.82/5",
-    ratingNote: "from 400+ verified buyers · Tag your fit on Instagram to be featured"
+    ratingNote:
+      "from 400+ verified buyers · Tag your fit on Instagram to be featured",
   },
 
   teaser: {
     countdown: "Drop 05 in 04 days : 18 hours : 22 mins",
     title: "Don't Miss Drop 05: Neo-Tokyo Acid Lab.",
-    description: "Limited run of 300 numbered garments. Once the allocation hits zero, plates are destroyed and this design is permanently archived.",
+    description:
+      "Limited run of 300 numbered garments. Once the allocation hits zero, plates are destroyed and this design is permanently archived.",
     emailPlaceholder: "ENTER YOUR EMAIL",
     buttonLabel: "Notify Me",
-    note: "Zero spam. Only priority zero-hour release alerts."
+    note: "Zero spam. Only priority zero-hour release alerts.",
   },
 
   // ------------------------------------------------------------------
@@ -344,30 +272,52 @@ const SITE_DATA = {
   catalogPage: {
     eyebrow: "Batch #047 · In Stock",
     title: "All Printed Graphic Tees",
-    description: "Screen-printed and DTG-cured streetwear staples engineered with drop shoulders, dense organic fibre, and anti-crack reactive dyes.",
+    description:
+      "Screen-printed and DTG-cured streetwear staples engineered with drop shoulders, dense organic fibre, and anti-crack reactive dyes.",
     categories: ["Graphic Tees", "Acid Wash", "Minimalist", "Typography"],
-    warranty: { title: "Screen Print Warranty", text: "Anti-crack cure, wash tested over 60 mechanical cycles." }
+    warranty: {
+      title: "Screen Print Warranty",
+      text: "Anti-crack cure, wash tested over 60 mechanical cycles.",
+    },
   },
 
   // ------------------------------------------------------------------
   // CART PAGE CONTENT
   // ------------------------------------------------------------------
   cartPage: {
-    freeShippingThreshold:999,
-    addon: { name: "Fabric Care Wash Bag", description: "Protects cured prints", price: 299 }
+    freeShippingThreshold: 999,
+    addon: {
+      name: "Fabric Care Wash Bag",
+      description: "Protects cured prints",
+      price: 299,
+    },
   },
 
- coupons: [
-    { code: "BLANK10", type: "percent", value: 10, description: "10% off your order" },
-    { code: "avm10", type: "flat", value: 100, description: "₹100 off your order" }
+  coupons: [
+    {
+      code: "BLANK10",
+      type: "percent",
+      value: 10,
+      description: "10% off your order",
+    },
+    {
+      code: "avm10",
+      type: "flat",
+      value: 100,
+      description: "₹100 off your order",
+    },
   ],
 
   // ------------------------------------------------------------------
   // FOOTER (shared across every page)
   // ------------------------------------------------------------------
   footer: {
-    description: "Heavyweight cotton streetwear, hand-pulled screen prints, and small-batch graphic garments engineered for high endurance and raw street curation.",
-    ecoBadge: { title: "100% Combed Cotton", subtitle: "Sustainably sourced · 220 GSM crafted jersey" },
+    description:
+      "Heavyweight cotton streetwear, hand-pulled screen prints, and small-batch graphic garments engineered for high endurance and raw street curation.",
+    ecoBadge: {
+      title: "100% Combed Cotton",
+      subtitle: "Sustainably sourced · 240 GSM crafted jersey",
+    },
     columns: [
       {
         title: "Catalog",
@@ -375,8 +325,8 @@ const SITE_DATA = {
           { label: "Heavyweight Boxy Tees", href: "shop.html" },
           { label: "Graphic Drop 04", href: "shop.html" },
           { label: "Oversized Silhouettes", href: "shop.html" },
-          { label: "Archive Reprints", href: "shop.html" }
-        ]
+          { label: "Archive Reprints", href: "shop.html" },
+        ],
       },
       {
         title: "Craft & Utility",
@@ -384,18 +334,18 @@ const SITE_DATA = {
           { label: "Sizing Matrix & Fit", href: "#" },
           { label: "Print Preservation", href: "#" },
           { label: "Drop Calendar", href: "#" },
-          { label: "Track Dispatch", href: "#" }
-        ]
-      }
+          { label: "Track Dispatch", href: "#" },
+        ],
+      },
     ],
     newsletter: {
       title: "VIP Drop Radar",
-      description: "Early zero-hour access to limited capsules before public sell-out.",
+      description:
+        "Early zero-hour access to limited capsules before public sell-out.",
       placeholder: "ENTER YOUR EMAIL",
-      button: "Join"
+      button: "Join",
     },
     copyright: "© 2026 Blankloom Apparel Co. All Rights Reserved.",
-    legalLinks: "Privacy · Terms · Release Index"
-  }
-
+    legalLinks: "Privacy · Terms · Release Index",
+  },
 };

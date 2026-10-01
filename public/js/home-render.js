@@ -31,7 +31,7 @@ function renderAnnouncement() {
 function renderHero() {
   const h = SITE_DATA.hero;
   const featured = getProduct(h.featuredProductId) || SITE_DATA.products[0];
-  document.getElementById("hero-eyebrow").textContent = h.eyebrow;
+  // document.getElementById("hero-eyebrow").textContent = h.eyebrow;
   document.getElementById("hero-headline-top").textContent = h.headlineTop;
   document.getElementById("hero-headline-accent").textContent = h.headlineAccent;
   document.getElementById("hero-description").textContent = h.description;
@@ -41,7 +41,7 @@ function renderHero() {
   document.getElementById("hero-cta-secondary").href = h.ctaSecondary.href;
   // document.getElementById("hero-rating-score").textContent = h.ratingScore;
   // document.getElementById("hero-rating-note").textContent = h.ratingNote;
-  document.getElementById("hero-badge").textContent = h.badge;
+  // document.getElementById("hero-badge").textContent = h.badge;
 
   // document.getElementById("float-card-name").textContent = featured.name;
   // document.getElementById("float-card-meta").textContent = featured.color;
@@ -145,7 +145,7 @@ function renderBestsellers() {
         <div class="psizes">${p.sizes.map(s => `<span>${s}</span>`).join("")}</div>
         <div class="pcard-foot">
           <span class="pprice">${formatPrice(p.price)}</span>
-          <button class="pquick" type="button" data-product-id="${p.id}">Quick Add</button>
+          <a class="pquick" href="product.html?id=${p.id}">View</a>
         </div>
       </div>
     </div>
@@ -174,26 +174,26 @@ function renderSpecs() {
 
 function renderUGC() {
   const u = SITE_DATA.ugc;
-  document.getElementById("ugc-eyebrow").textContent = u.eyebrow;
-  document.getElementById("ugc-heading").textContent = u.title;
-  document.getElementById("ugc-grid").innerHTML = Array.from({ length: u.tileCount }).map(() => `
-    <div class="ugc-tile">
-      <div style="width:45%;">${printSVG("circle")}</div>
-      <span class="tag-handle">${u.hashtag}</span>
-    </div>
-  `).join("");
-  document.getElementById("ugc-rating-score").textContent = u.ratingScore;
-  document.getElementById("ugc-rating-note").textContent = u.ratingNote;
+  // document.getElementById("ugc-eyebrow").textContent = u.eyebrow;
+  // document.getElementById("ugc-heading").textContent = u.title;
+  // document.getElementById("ugc-grid").innerHTML = Array.from({ length: u.tileCount }).map(() => `
+  //   <div class="ugc-tile">
+  //     <div style="width:45%;">${printSVG("circle")}</div>
+  //     <span class="tag-handle">${u.hashtag}</span>
+  //   </div>
+  // `).join("");
+  // document.getElementById("ugc-rating-score").textContent = u.ratingScore;
+  // document.getElementById("ugc-rating-note").textContent = u.ratingNote;
 }
 
 function renderTeaser() {
   const t = SITE_DATA.teaser;
-  document.getElementById("teaser-countdown").textContent = t.countdown;
-  document.getElementById("teaser-heading").textContent = t.title;
-  document.getElementById("teaser-description").textContent = t.description;
-  document.getElementById("teaser-email").placeholder = t.emailPlaceholder;
-  document.getElementById("teaser-button").textContent = t.buttonLabel;
-  document.getElementById("teaser-note").textContent = t.note;
+  // document.getElementById("teaser-countdown").textContent = t.countdown;
+  // document.getElementById("teaser-heading").textContent = t.title;
+  // document.getElementById("teaser-description").textContent = t.description;
+  // document.getElementById("teaser-email").placeholder = t.emailPlaceholder;
+  // document.getElementById("teaser-button").textContent = t.buttonLabel;
+  // document.getElementById("teaser-note").textContent = t.note;
 }
 
 function renderFooter() {
@@ -254,22 +254,6 @@ function initMobileMenu() {
   });
 }
 
-function initQuickAdd() {
-  document.querySelectorAll(".pquick").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.productId;
-      const product = getProduct(id);
-      const defaultSize = product.sizes[Math.floor(product.sizes.length / 2)];
-      addToCart(id, defaultSize, 1);
-      renderCartCountLabel();
-      const original = btn.textContent;
-      btn.textContent = "Added ✓";
-      btn.disabled = true;
-      setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1200);
-    });
-  });
-}
-
 function renderCartCountLabel() {
   const label = document.getElementById("cart-count-label");
   if (!label) return;
@@ -302,7 +286,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFooter();
   renderStructuredData();
   initMobileMenu();
-  initQuickAdd();
   initNewsletterForms();
   renderCartCountLabel();
 });

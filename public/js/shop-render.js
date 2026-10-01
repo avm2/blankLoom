@@ -33,35 +33,35 @@ function renderPageHeader() {
   document.getElementById("catalog-eyebrow").textContent = c.eyebrow;
   document.getElementById("catalog-title").textContent = c.title;
   document.getElementById("catalog-description").textContent = c.description;
-  document.getElementById("warranty-title").textContent = c.warranty.title;
-  document.getElementById("warranty-text").textContent = c.warranty.text;
+  // document.getElementById("warranty-title").textContent = c.warranty.title;
+  // document.getElementById("warranty-text").textContent = c.warranty.text;
 }
 
 function renderFilters() {
   const categories = SITE_DATA.catalogPage.categories;
   const allSizes = ["S", "M", "L", "XL", "2XL"];
 
-  document.getElementById("category-filters").innerHTML = categories.map(cat => {
-    const count = SITE_DATA.products.filter(p => p.category === cat).length;
-    return `
-      <label class="check-row">
-        <input type="checkbox" data-category="${cat}">
-        ${cat} <span class="cnt">${count}</span>
-      </label>
-    `;
-  }).join("");
+  // document.getElementById("category-filters").innerHTML = categories.map(cat => {
+  //   const count = SITE_DATA.products.filter(p => p.category === cat).length;
+  //   return `
+  //     <label class="check-row">
+  //       <input type="checkbox" data-category="${cat}">
+  //       ${cat} <span class="cnt">${count}</span>
+  //     </label>
+  //   `;
+  // }).join("");
 
   document.getElementById("size-filters").innerHTML = allSizes.map(s =>
     `<button type="button" class="size-chip" data-size="${s}">${s}</button>`
   ).join("");
 
-  document.querySelectorAll('#category-filters input[type="checkbox"]').forEach(cb => {
-    cb.addEventListener("change", () => {
-      if (cb.checked) activeState.categories.add(cb.dataset.category);
-      else activeState.categories.delete(cb.dataset.category);
-      renderGrid();
-    });
-  });
+  // document.querySelectorAll('#category-filters input[type="checkbox"]').forEach(cb => {
+  //   cb.addEventListener("change", () => {
+  //     if (cb.checked) activeState.categories.add(cb.dataset.category);
+  //     else activeState.categories.delete(cb.dataset.category);
+  //     renderGrid();
+  //   });
+  // });
 
   document.querySelectorAll("#size-filters .size-chip").forEach(chip => {
     chip.addEventListener("click", () => {
@@ -74,7 +74,7 @@ function renderFilters() {
 
   document.getElementById("filter-reset").addEventListener("click", () => {
     activeState = { categories: new Set(), sizes: new Set(), sort: "featured" };
-    document.querySelectorAll('#category-filters input').forEach(cb => cb.checked = false);
+    // document.querySelectorAll('#category-filters input').forEach(cb => cb.checked = false);
     document.querySelectorAll("#size-filters .size-chip").forEach(chip => chip.classList.remove("selected"));
     document.getElementById("sort-select").value = "featured";
     renderGrid();
@@ -126,29 +126,16 @@ function renderGrid() {
         </div>
       </a>
       <div class="pcard-body">
-        <div class="rating"><span class="stars" aria-hidden="true">★★★★★</span> ${p.rating.score} (${p.rating.count})</div>
+
         <h3><a href="product.html?id=${p.id}">${p.name}</a></h3>
         <div class="psizes">${p.sizes.map(s => `<span>${s}</span>`).join("")}</div>
         <div class="pcard-foot">
           <span class="pprice">${formatPrice(p.price)}${p.originalPrice ? `<span class="was">${formatPrice(p.originalPrice)}</span>` : ""}</span>
-          <button class="pquick" type="button" data-product-id="${p.id}">Quick Add</button>
+          <a class="pquick" href="product.html?id=${p.id}">View</a>
         </div>
       </div>
     </div>
   `).join("");
-
-  document.querySelectorAll(".pquick").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const product = getProduct(btn.dataset.productId);
-      const defaultSize = product.sizes[Math.floor(product.sizes.length / 2)];
-      addToCart(product.id, defaultSize, 1);
-      renderCartCountLabel();
-      const original = btn.textContent;
-      btn.textContent = "Added ✓";
-      btn.disabled = true;
-      setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1200);
-    });
-  });
 }
 
 function renderFooter() {

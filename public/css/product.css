@@ -23,8 +23,8 @@
 .b-instock{background:rgba(16,185,129,0.12); color:var(--emerald); border:1px solid rgba(16,185,129,0.3);}
 .b-outofstock{background:rgba(192,57,43,0.1); color:var(--error); border:1px solid rgba(192,57,43,0.25);}
 .pd-title{font-family:'Chivo',sans-serif; font-weight:900; font-size:clamp(26px,3vw,34px); line-height:1.08; letter-spacing:-0.02em; margin:0 0 12px;}
-.pd-rating{display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--text-soft); margin-bottom:22px;}
-.pd-rating .stars{color:#F5A623;}
+/* .pd-rating{display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--text-soft); margin-bottom:22px;}
+.pd-rating .stars{color:#F5A623;} */
 .pd-price{display:flex; align-items:baseline; gap:12px; margin-bottom:24px; flex-wrap:wrap;}
 .pd-price .now{font-family:'Space Mono',monospace; font-weight:700; font-size:28px;}
 .pd-price .was{font-family:'Space Mono',monospace; color:var(--text-faint); text-decoration:line-through; font-size:16px;}

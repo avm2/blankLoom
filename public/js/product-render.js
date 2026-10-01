@@ -46,7 +46,7 @@ function renderProduct() {
     const badges = `
       <div class="media-badges">
         <span class="b-drop">Drop 04 / Exclusive</span>
-        <span class="b-gsm">220 GSM Heavyweight</span>
+        <span class="b-gsm">240 GSM Heavyweight</span>
       </div>
     `;
     document.getElementById("main-media").innerHTML = src
@@ -78,7 +78,7 @@ function renderProduct() {
     <span class="${inStock ? "b-instock" : "b-outofstock"}">${inStock ? "● In Stock · Ships Today" : "Out of Stock"}</span>
   `;
   document.getElementById("pd-title").textContent = p.name;
-  document.getElementById("pd-rating").innerHTML = `<span class="stars" aria-hidden="true">★★★★★</span> ${p.rating.score} (${p.rating.count} Reviews)`;
+  // document.getElementById("pd-rating").innerHTML = `<span class="stars" aria-hidden="true">★★★★★</span> ${p.rating.score} (${p.rating.count} Reviews)`;
 
   document.getElementById("pd-price").innerHTML = `
     <span class="now">${formatPrice(p.price)}</span>

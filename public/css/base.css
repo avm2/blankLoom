@@ -43,8 +43,23 @@ header{
 }
 .logo{display:flex; align-items:center; gap:9px;}
 .logo .mark{width:26px;height:26px;background:var(--ink); border-radius:5px; position:relative; flex-shrink:0;}
-.logo .mark::after{content:'';position:absolute; inset:6px; background:var(--surface); border-radius:2px;}
-.logo span{font-family:'Chivo',sans-serif; font-weight:800; font-size:19px; letter-spacing:-0.02em;}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 125px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 115px;
+  }
+}
 nav#primary-nav{display:flex; gap:6px;}
 nav#primary-nav a{
   font-family:'Space Mono',monospace; font-size:12px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
