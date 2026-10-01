@@ -77,10 +77,10 @@ const SITE_DATA = {
       color: "Cloud White",
       print: "type",
       images: [
-        "images/products/white_hitMan_ModalFront.jpeg",
-        "images/products/white_hitMan_ModalBack.jpeg",
-        "images/products/white_hitMan_front.jpeg",
-        "images/products/white_hitMan_Back.jpeg",
+        "images/products/hitman-45-front-modal.jpeg",
+        "images/products/hitman-45-back-modal.jpeg",
+        "images/products/hitman-45-front.jpeg",
+        "images/products/hitman-45-back.jpeg",
       ],
       rating: { score: "4.8", count: 0 },
       description:
