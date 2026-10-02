@@ -1,128 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Product — Blankloom</title>
-<meta name="description" content="Heavyweight printed cotton tee from Blankloom.">
-<meta name="robots" content="index, follow">
-<meta property="og:type" content="product">
-<meta property="og:site_name" content="Blankloom">
-<meta name="theme-color" content="#0F172A">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/product.css">
+  <meta charset="UTF-8">
+  <script id="product-schema" type="application/ld+json"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Product — Blankloom</title>
+  <meta name="description" content="Heavyweight printed cotton tee from Blankloom.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="Blankloom">
+  <meta name="theme-color" content="#0F172A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/product.css">
 </head>
+
 <body>
 
-<a href="#main-content" class="visually-hidden-focusable">Skip to content</a>
+  <a href="#main-content" class="visually-hidden-focusable">Skip to content</a>
 
-<div class="announce" role="note" aria-label="Site announcement"><div id="announce-content"></div></div>
-
-<header>
-   <a href="index.html" class="logo" aria-label="Blankloom home">
-  <img src="./images/products/blankloom-header-logo.png" alt="Blankloom">
-</a>
-  <nav id="primary-nav" aria-label="Primary navigation"></nav>
-  <div class="header-right">
-    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
-    <!-- <button class="icon-btn" aria-label="Wishlist"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button> -->
-    <a href="cart.html" class="bag-btn" aria-label="View bag"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg> <span id="cart-count-label">0 items</span></a>
-  </div>
-</header>
-<nav id="mobile-nav" aria-label="Mobile navigation"></nav>
-
-<div class="breadcrumb">Home / <a href="shop.html">Catalog</a> / <span id="breadcrumb-name"></span></div>
-
-<main id="main-content">
-  <div class="pd-layout">
-    <div class="gallery">
-      <div class="thumbs" id="thumbs"></div>
-      <div class="main-media" id="main-media"></div>
-    </div>
-
-    <div class="pd-info">
-      <div class="info-badges" id="info-badges"></div>
-      <h1 class="pd-title" id="pd-title"></h1>
-      <!-- <p class="pd-rating" id="pd-rating"></p> -->
-      <p class="pd-price" id="pd-price"></p>
-
-      <div class="pd-block">
-        <label id="color-label"></label>
-      </div>
-
-      <div class="pd-block">
-        <label>Select Size</label>
-        <div class="pd-sizes" id="pd-sizes"></div>
-        <p class="size-note" id="size-note"></p>
-      </div>
-
-      <div class="qty-add-row">
-        <div class="qty-stepper"><button type="button" id="qty-minus" aria-label="Decrease quantity">−</button><span id="qty-val">1</span><button type="button" id="qty-plus" aria-label="Increase quantity">+</button></div>
-        <button class="btn-add" id="btn-add" type="button"></button>
-      </div>
-
-      <div class="pd-perks">
-        <div class="perk"><span class="ic" aria-hidden="true">🚚</span><div><b>Free dispatch on orders over ₹999</b><span>Ships in 2–4 business days from our print studio</span></div></div>
-        <div class="perk"><span class="ic" aria-hidden="true">🧵</span><div><b>100% 240 GSM ring-spun cotton</b><span>Thick tactile handfeel engineered to resist warping</span></div></div>
-        <div class="perk"><span class="ic" aria-hidden="true">🖨️</span><div><b>Crack-proof reactive pigment print</b><span>High-density curing rated for 100+ wash cycles</span></div></div>
-      </div>
-    </div>
+  <div class="announce" role="note" aria-label="Site announcement">
+    <div id="announce-content"></div>
   </div>
 
-  <div class="specs-section">
-    <div class="specs-grid">
-      <div class="spec-card">
-        <h4>📐 Product Details</h4>
-        <p id="spec-description" style="color:var(--text-soft); font-size:13.5px; line-height:1.7; margin:0 0 10px;"></p>
-        <p style="font-family:'Space Mono',monospace; font-size:11.5px; color:var(--text-faint); margin:0;">SKU: <span id="spec-sku"></span></p>
+  <header>
+    <a href="index.html" class="logo" aria-label="Blankloom home">
+      <img src="./images/products/blankloom-header-logo.png" alt="Blankloom">
+    </a>
+    <nav id="primary-nav" aria-label="Primary navigation"></nav>
+    <div class="header-right">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false"
+        aria-controls="mobile-nav"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg></button>
+      <!-- <button class="icon-btn" aria-label="Wishlist"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button> -->
+      <a href="cart.html" class="bag-btn" aria-label="View bag"><svg class="icon-svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 7h12l1 13H5L6 7z" />
+          <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+        </svg> <span id="cart-count-label">0 items</span></a>
+    </div>
+  </header>
+  <nav id="mobile-nav" aria-label="Mobile navigation"></nav>
+
+  <div class="breadcrumb">Home / <a href="shop.html">Catalog</a> / <span id="breadcrumb-name"></span></div>
+
+  <main id="main-content">
+    <div class="pd-layout">
+      <div class="gallery">
+        <div class="thumbs" id="thumbs"></div>
+        <div class="main-media" id="main-media"></div>
       </div>
-      <div class="spec-card">
-        <h4>🖨️ DTG &amp; Screen Printing</h4>
-        <ul>
-          <li>1200 DPI piezo pigment print technology</li>
-          <li>Eco-friendly water-based non-toxic inks</li>
-          <li>Pre-shrunk with enzyme wash to lock in pigments</li>
-        </ul>
-      </div>
-      <div class="spec-card">
-        <h4>🧺 Care Protocol</h4>
-        <ul>
-          <li>Machine wash cold (30°C), inside out</li>
-          <li>Hang air dry away from direct UV exposure</li>
-          <li>Do not iron directly over the graphic print</li>
-        </ul>
+
+      <div class="pd-info">
+        <div class="info-badges" id="info-badges"></div>
+        <h1 class="pd-title" id="pd-title"></h1>
+        <!-- <p class="pd-rating" id="pd-rating"></p> -->
+        <p class="pd-price" id="pd-price"></p>
+
+        <div class="pd-block">
+          <label id="color-label"></label>
+        </div>
+
+        <div class="pd-block">
+          <label>Select Size</label>
+          <div class="pd-sizes" id="pd-sizes"></div>
+          <p class="size-note" id="size-note"></p>
+        </div>
+
+        <div class="qty-add-row">
+          <div class="qty-stepper"><button type="button" id="qty-minus" aria-label="Decrease quantity">−</button><span
+              id="qty-val">1</span><button type="button" id="qty-plus" aria-label="Increase quantity">+</button></div>
+          <button class="btn-add" id="btn-add" type="button"></button>
+        </div>
+
+        <div class="pd-perks">
+          <div class="perk"><span class="ic" aria-hidden="true">🚚</span>
+            <div><b>Free dispatch on orders over ₹999</b><span>Ships in 2–4 business days from our print studio</span>
+            </div>
+          </div>
+          <div class="perk"><span class="ic" aria-hidden="true">🧵</span>
+            <div><b>100% 240 GSM ring-spun cotton</b><span>Thick tactile handfeel engineered to resist warping</span>
+            </div>
+          </div>
+          <div class="perk"><span class="ic" aria-hidden="true">🖨️</span>
+            <div><b>Crack-proof reactive pigment print</b><span>High-density curing rated for 100+ wash cycles</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="related-section">
-    <div class="section-head">
-      <div><h2 style="font-family:'Chivo',sans-serif; font-weight:800; font-size:24px; margin:0;">You Might Also Like</h2></div>
-    </div>
-    <div class="grid4" id="related-grid"></div>
-  </div>
-</main>
-
-<footer>
-  <div class="foot-grid">
-    <div class="foot-brand">
-      <div class="logo"><span class="mark" aria-hidden="true"></span><span>BLANKLOOM</span></div>
-      <p id="footer-description"></p>
-      <div class="foot-eco">
-        <span style="font-size:18px;" aria-hidden="true">🌿</span>
-        <div><b id="footer-eco-title"></b><span id="footer-eco-subtitle"></span></div>
+    <div class="specs-section">
+      <div class="specs-grid">
+        <div class="spec-card">
+          <h4>📐 Product Details</h4>
+          <p id="spec-description" style="color:var(--text-soft); font-size:13.5px; line-height:1.7; margin:0 0 10px;">
+          </p>
+          <p style="font-family:'Space Mono',monospace; font-size:11.5px; color:var(--text-faint); margin:0;">SKU: <span
+              id="spec-sku"></span></p>
+        </div>
+        <div class="spec-card">
+          <h4>🖨️ DTG &amp; Screen Printing</h4>
+          <ul>
+            <li>1200 DPI piezo pigment print technology</li>
+            <li>Eco-friendly water-based non-toxic inks</li>
+            <li>Pre-shrunk with enzyme wash to lock in pigments</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>🧺 Care Protocol</h4>
+          <ul>
+            <li>Machine wash cold (30°C), inside out</li>
+            <li>Hang air dry away from direct UV exposure</li>
+            <li>Do not iron directly over the graphic print</li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div id="footer-columns" style="display:contents;"></div>
-  </div>
-  <div class="foot-bottom"><span id="footer-copyright"></span><span id="footer-legal"></span></div>
-</footer>
 
-<script src="js/site-data.js"></script>
-<script src="js/product-utils.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/product-render.js"></script>
+    <div class="related-section">
+      <div class="section-head">
+        <div>
+          <h2 style="font-family:'Chivo',sans-serif; font-weight:800; font-size:24px; margin:0;">You Might Also Like
+          </h2>
+        </div>
+      </div>
+      <div class="grid4" id="related-grid"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><span class="mark" aria-hidden="true"></span><span>BLANKLOOM</span></div>
+        <p id="footer-description"></p>
+        <div class="foot-eco">
+          <span style="font-size:18px;" aria-hidden="true">🌿</span>
+          <div><b id="footer-eco-title"></b><span id="footer-eco-subtitle"></span></div>
+        </div>
+      </div>
+      <div id="footer-columns" style="display:contents;"></div>
+    </div>
+    <div class="foot-bottom"><span id="footer-copyright"></span><span id="footer-legal"></span></div>
+  </footer>
+
+  <script src="js/site-data.js"></script>
+  <script src="js/product-utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/product-render.js"></script>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("id");
+
+      if (!productId || !window.SITE_DATA || !Array.isArray(SITE_DATA.products)) {
+        return;
+      }
+
+      const product = SITE_DATA.products.find(
+        item => item.id === productId
+      );
+
+      if (!product) {
+        return;
+      }
+
+      // Dynamic SEO title
+      document.title = `${product.name} | Blankloom`;
+
+      // Dynamic SEO description
+      const metaDescription = document.querySelector(
+        'meta[name="description"]'
+      );
+
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          "content",
+          product.description
+        );
+      }
+
+      const productUrl =
+        "https://blankloom.in/product.html?id=" +
+        encodeURIComponent(product.id);
+
+      const imageUrls = Array.isArray(product.images)
+        ? product.images
+          .filter(Boolean)
+          .map(image => {
+            if (image.startsWith("http")) {
+              return image;
+            }
+
+            return "https://blankloom.in/" + image.replace(/^\/+/, "");
+          })
+        : [];
+
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+
+        "name": product.name,
+
+        "description": product.description,
+
+        "image": imageUrls,
+
+        "sku": product.sku,
+
+        "brand": {
+          "@type": "Brand",
+          "name": "Blankloom"
+        },
+
+        "category": product.category,
+
+        "color": product.color,
+
+        "offers": {
+          "@type": "Offer",
+          "url": productUrl,
+          "priceCurrency": "INR",
+          "price": product.price,
+          "availability":
+            product.stockCount > 0
+              ? "https://schema.org/InStock"
+              : "https://schema.org/OutOfStock",
+          "itemCondition": "https://schema.org/NewCondition"
+        }
+      };
+
+      const schemaElement = document.getElementById("product-schema");
+
+      if (schemaElement) {
+        schemaElement.textContent = JSON.stringify(schema);
+      }
+    })();
+  </script>
 </body>
+
 </html>
